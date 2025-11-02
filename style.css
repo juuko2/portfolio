@@ -81,26 +81,26 @@ body {
 .hero-page { height: 40vh; }
 .hero-page h1 { font-size: 2.5rem; }
 
-/* --- Taustakuvat (PÄIVITETTY HAHMOLLA JA TEEMOILLA) --- */
-/* "Noniin." (Hahmo katsoo eteenpäin, kompassi tai kartta taustalla) */
+/* --- Taustakuvat (KORJATTU PYSYVILLÄ TEEMAKUVILLA) --- */
+/* "Noniin." (Kompassi kartalla) */
 .hero-alku { 
-    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/ed582e0e2a2511eea7b60242ac110002/image.jpg'); 
+    background-image: url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2'); 
 }
-/* "Ollakko..." (Hahmo mietteliäänä tyhjän muistikirjan edessä) */
+/* "Ollakko..." (Mies pohtimassa järvellä) */
 .hero-lahtoruutu { 
-    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/f228b7a62a2511eea7b60242ac110002/image.jpg');
+    background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08');
 }
-/* "Suattaapi olla näin" (Hahmo polun haarassa sumuisessa metsässä) */
+/* "Suattaapi olla näin" (Sumuinen, haarautuva polku) */
 .hero-matkan-varrelta { 
-    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/f90f6b382a2511eea7b60242ac110002/image.jpg');
+    background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d490ace');
 }
-/* "Niimpä tietennii!" (Hahmo keskittyneenä piirustuspöydän ääressä) */
+/* "Niimpä tietennii!" (Piirustukset ja työkalut) */
 .hero-synteesi { 
-    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/17855b722a2611eea7b60242ac110002/image.jpg');
+    background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158');
 }
-/* "On se tämäkin työmaa" (Hahmo työmaan reunalla auringonlaskussa) */
+/* "On se tämäkin työmaa" (Nosturi ja työmaa auringonlaskussa) */
 .hero-eteenpain { 
-    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/1d2e2b962a2611eea7b60242ac110002/image.jpg');
+    background-image: url('https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a');
 }
 /* --- Kuvat päättyy --- */
 
@@ -165,7 +165,6 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     transform: translateX(50px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-/* Tämä 'visible'-luokka nollaa kaikki animaatiot */
 .animate-on-scroll.visible,
 .animate-slide-left.visible,
 .animate-slide-right.visible {
@@ -176,12 +175,13 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 
 /* --- Juju 1: Osaamisen mittarit --- */
 .counter-section {
-    background-color: var(--secondary-color); /* Vaalea tausta erottumaan */
+    background-color: var(--secondary-color);
     padding: 2rem 0;
     margin: 2.5rem 0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
+/* Asetelma 3 laskurille */
 .counter-container {
     display: flex;
     justify-content: space-around;
@@ -229,8 +229,8 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .info-card:hover {
-    transform: translateY(-5px); /* "Nousee" hieman */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Voimakkaampi varjo */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 .info-card h4 {
     font-family: var(--header-font);
