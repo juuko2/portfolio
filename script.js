@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             window.scrollTo({ top: 0, behavior: 'auto' });
 
-            // Käynnistä animaatiot uudella sivulla
             initializeScrollObserver(targetPage);
 
             setTimeout(() => {
@@ -43,10 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS (PÄIVITETTY) ---
+    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS ---
     function initializeScrollObserver(container) {
         
-        // Etsii KAIKKI animoitavat elementit (Juju 1, 2 ja 3)
         const elementsToAnimate = container.querySelectorAll(
             '.animate-on-scroll, .animate-slide-left, .animate-slide-right'
         );
@@ -54,37 +52,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // 1. Lisää perus 'visible'-luokka animaatiota varten
                     entry.target.classList.add('visible');
                     
-                    // 2. TARKISTA, ONKO TÄMÄ LASKURILOHKO (Juju 1)
                     const counters = entry.target.querySelectorAll('.counter');
                     if (counters.length > 0) {
                         counters.forEach(counter => {
-                            // Varmista, ettei laskuria ajeta montaa kertaa
                             if (counter.classList.contains('animated')) return;
                             counter.classList.add('animated');
                             
-                            const target = +counter.dataset.target;
-                            const duration = 4500; // 4.5 sekuntia
-                            const stepTime = 20; // Päivitä 50 krt/sek
+                            const target = +counter.dataset.target; // Muuttaa "5" numeroksi 5
+                            
+                            // ***** KORJAUS 1: KESTO *****
+                            const duration = 4500; // Sinun asettamasi 4.5 sekuntia
+                            const stepTime = 20; 
+                            
                             const steps = duration / stepTime;
                             const increment = target / steps;
                             let current = 0;
 
                             const timer = setInterval(() => {
                                 current += increment;
+
                                 if (current >= target) {
                                     clearInterval(timer);
-                                    counter.innerText = target;
+                                    // ***** KORJAUS 2: DESIMAALIN NÄYTTÖ *****
+                                    // Tarkista onko luku desimaali vai kokonaisluku
+                                    if (target % 1 !== 0) {
+                                        counter.innerText = target.toFixed(1); // Näyttäisi 1.5
+                                    } else {
+                                        counter.innerText = target; // Näyttää 4, 5 tai 200
+                                    }
                                 } else {
-                                    counter.innerText = Math.floor(current);
+                                    // Päivitys animaation aikana
+                                    if (target % 1 !== 0) {
+                                        counter.innerText = current.toFixed(1);
+                                    } else {
+                                        counter.innerText = Math.floor(current);
+                                    }
                                 }
                             }, stepTime);
                         });
                     }
                 } else {
-                    // Tämän voi poistaa, jos et halua animaation toistuvan
                     // entry.target.classList.remove('visible'); 
                 }
             });
@@ -93,18 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
         elementsToAnimate.forEach(el => observer.observe(el));
     }
 
-    // Käynnistä animaatiot oletuksena näkyvälle "alku"-sivulle heti alussa
     initializeScrollObserver(document.getElementById('alku'));
 
 
-    // --- "TAKAISIN YLÖS" -NAPPI (KORJATTU) ---
+    // --- "TAKAISIN YLÖS" -NAPPI ---
     window.addEventListener('scroll', () => {
         if (toTopButton) {
             if (window.scrollY > 300) {
                 toTopButton.classList.add('visible');
             } else {
-                // TÄMÄ ON KORJATTU: Piti olla 'remove'
-                toTopButton.classList.remove('visible'); 
+                toTopButton.classList.remove('visible');
             }
         }
     });
