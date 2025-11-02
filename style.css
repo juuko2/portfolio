@@ -24,8 +24,10 @@ body {
     line-height: 1.7;
     color: var(--dark-text);
     background-color: var(--white);
-    /* TÄSSÄ ANIMAATIO! */
-    animation: fadeIn 0.8s ease-in-out;
+    
+    /* TÄMÄ ON MUUTETTU: Poistettu 'animation', lisätty 'transition' 
+       valmistelemaan nopeaa uloshäivytystä. */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .container {
@@ -34,17 +36,9 @@ body {
     padding: 0 20px;
 }
 
-/* --- Sivun vaihdon animaatio --- */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* --- Sivun vaihdon animaatio (POISTETTU) --- */
+/* @keyframes fadeIn ... poistettu täältä, koska se oli raskas */
+
 
 /* --- Navigaatiopalkki --- */
 .navbar {
@@ -85,16 +79,9 @@ body {
     font-weight: 700;
     padding-bottom: 5px;
     transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-.navbar-nav a:hover {
-    color: var(--accent-color);
-}
-
-/* Tämä korostaa aktiivisen sivun navigaatiossa */
-.navbar-nav a.active {
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
+    /* Lisätty position relative uutta alleviivausta varten */
+    position: relative; 
+    border-bottom: 3px solid transparent; 
 }
 
 /* --- Hero-bannerit (Jokaiselle sivulle oma) --- */
@@ -119,198 +106,4 @@ body {
 
 .hero h1 {
     font-family: var(--header-font);
-    font-size: 2.8rem;
-    line-height: 1.3;
-}
-
-/* Etusivun (index) banneri */
-.hero-home {
-    height: 70vh;
-    background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da977511');
-}
-
-/* Alisivujen pienempi banneri */
-.hero-page {
-    height: 40vh; /* Matalampi banneri alisivuilla */
-}
-
-.hero-page h1 {
-    font-size: 2.5rem;
-}
-
-/* Tässä jokaiselle sivulle oma kuva! */
-.hero-lahtoruutu {
-    background-image: url('https://images.unsplash.com/photo-1554141552-f74868f60f79');
-}
-.hero-matkan-varrelta {
-    background-image: url('https://images.unsplash.com/photo-1557682223-38e551c6b650');
-}
-.hero-synteesi {
-    background-image: url('https://images.unsplash.com/photo-1528731708813-c655b68633e0');
-}
-.hero-eteenpain {
-    background-image: url('https://images.unsplash.com/photo-1534447677768-be436a097959');
-}
-
-/* --- Sivujen sisältöalue --- */
-main {
-    background-color: var(--light-text);
-    padding: 3rem 0;
-}
-
-.content-section {
-    padding-top: 2rem;
-}
-
-.content-section h2 {
-    font-family: var(--header-font);
-    font-size: 2.2rem;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid var(--accent-color);
-}
-
-.content-section h3 {
-    font-family: var(--header-font);
-    font-size: 1.5rem;
-    color: var(--dark-text);
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-.content-section p, .content-section ul {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.content-section ul {
-    margin-left: 20px;
-}
-
-/* --- Alapalkki --- */
-.footer {
-    background-color: var(--dark-text);
-    color: var(--light-text);
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 3rem;
-}
-
-/* --- Responsiivisuus --- */
-@media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .navbar-nav {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 1rem;
-    }
-    .navbar-nav li {
-        margin-left: 0;
-        width: 100%;
-    }
-    .navbar-nav a {
-        display: block;
-        padding: 0.5rem 0;
-    }
-    .navbar-nav a.active {
-        border-bottom-width: 0;
-        background-color: var(--secondary-color);
-    }
-    .hero h1 {
-        font-size: 2rem;
-    }
-    .hero-page {
-        height: 30vh;
-    }
-/* --- LISÄTYT SILMÄKARKKI- JA JS-TYYLIT --- */
-
-/* --- Parannus 1: Animoitu alleviivaus navigaatiossa --- */
-.navbar-nav a {
-    position: relative; /* Tarvitaan ::after-elementin paikantamiseen */
-    /* Poistetaan vanha reunaviiva, jos se on vielä olemassa */
-    border-bottom: 3px solid transparent; 
-    padding-bottom: 5px;
-}
-
-/* Tämä luo "piilotetun" alleviivauksen */
-.navbar-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0; /* Aluksi leveys on nolla */
-    height: 3px;
-    background-color: var(--accent-color); /* Käytä korostusväriä */
-    bottom: 0; /* Aseta viiva alas */
-    left: 50%; /* Aloita keskeltä */
-    transform: translateX(-50%); /* Tasaa keskelle */
-    transition: width 0.3s ease-in-out; /* Tässä on animaatio! */
-}
-
-/* Kun hiiren vie päälle, kasvata leveys 100% */
-.navbar-nav a:hover::after {
-    width: 100%;
-}
-
-/* Korjataan aktiivisen linkin tyyli */
-.navbar-nav a.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color); /* Näytä pysyvä viiva aktiivisella */
-}
-
-/* Älä näytä hover-efektiä aktiivisella linkillä */
-.navbar-nav a.active:hover::after {
-    width: 0;
-}
-
-
-/* --- Parannus 2: "Fade-in on Scroll" -tyylit --- */
-
-/* Tämä on elementtien oletustila (piilossa) */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px); /* Tulee hieman alhaalta ylös */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-/* Tämä luokka lisätään JavaScriptillä, kun elementti tulee näkyviin */
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* --- Parannus 3: "Takaisin ylös" -napin tyylit --- */
-#to-top-btn {
-    position: fixed; /* Pysyy paikallaan selatessa */
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%; /* Täysin pyöreä */
-    width: 50px;
-    height: 50px;
-    font-size: 24px; /* Isompi nuoli */
-    line-height: 50px; /* Keskittää nuolen pystysuunnassa */
-    text-align: center;
-    cursor: pointer;
-    opacity: 0; /* Oletuksena piilossa */
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000;
-}
-
-/* Tämä luokka lisätään JS:llä, kun nappi pitää näyttää */
-#to-top-btn.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Pieni hover-efekti napille */
-#to-top-btn:hover {
-    background-color: var(--accent-color);
-}}
-
+    font-size: 2.8
