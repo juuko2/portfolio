@@ -77,8 +77,8 @@ body {
 /* --- Hero-bannerit --- */
 .hero {
     color: var(--light-text);
-    background-size: cover; /* TÄRKEIN: Skaalaa kuvan niin, että se peittää koko alueen */
-    background-position: center center; /* TÄRKEIN: Keskitä kuva sekä vaaka- että pystysuunnassa */
+    background-size: cover; /* Skaalaa kuvan niin, että se peittää koko alueen */
+    background-position: center center; /* Oletus: Keskitä kuva */
     background-repeat: no-repeat; /* Varmistaa, ettei kuva toistu */
     background-attachment: fixed; /* Jotta kuva pysyy paikallaan skrollatessa */
     position: relative;
@@ -89,29 +89,41 @@ body {
     overflow: hidden; /* Estää kuvan reunoja "valumasta" yli, jos se on liian suuri */
 }
 
-/* --- Taustakuvat (PÄIVITETTY KÄYTTÄMÄÄN PAIKALLISIA TIEDOSTOJA) --- */
+/* --- TÄSSÄ PÄIVITYKSET KORKEUDEEN --- */
+.hero-page { 
+    height: 50vh; /* Nosta korkeutta, esim. 50% näytön korkeudesta */
+    min-height: 250px; /* Vähimmäiskorkeus, jotta kuva näkyy edes pienellä näytöllä */
+}
+.hero-page h1 { font-size: 2.5rem; }
+
+
+/* --- Taustakuvat (PÄIVITETTY KÄYTTÄMÄÄN PAIKALLISIA TIEDOSTOJA JA KOPIITUJA POSITION-ESIMERKKEJÄ) --- */
 /* Oletus: kaikki kuvat ovat 'images'-kansiossa */
 
 /* "Noniin." */
 .hero-alku { 
-    /* Käytetään profiili.png/jpg, sillä se on hyvä aloitussivuun */
     background-image: url('images/profiili.jpg'); 
+    background-position: center 25%; /* Esimerkki: Yritä pitää tärkeä sisältö näkyvissä. Säädä tätä! */
 }
 /* "Ollakko vai ollakko olematta" */
 .hero-lahtoruutu { 
     background-image: url('images/ollakkovaiollakko.png');
+    background-position: center 60%; /* Esimerkki: Kokeile pitää yläosa näkyvissä paremmin. Säädä tätä! */
 }
 /* "Suattaapi olla näin" */
 .hero-matkan-varrelta { 
     background-image: url('images/suottaapiolla.png');
+    background-position: center center; /* Voit jättää "center center" jos se toimii tälle */
 }
 /* "Niimpä tietennii!" */
 .hero-synteesi { 
     background-image: url('images/Niimpatietennii.png');
+    background-position: center 30%; /* Esimerkki: Jos tärkeä sisältö on kuvan yläosassa. Säädä tätä! */
 }
 /* "On se tämäkin työmaa" */
 .hero-eteenpain { 
     background-image: url('images/Onsetyomaa.png');
+    background-position: center 60%; /* Esimerkki: Jos tärkeä sisältö on hieman keskikohdan alapuolella. Säädä tätä! */
 }
 /* --- Kuvat päättyy --- */
 
@@ -134,8 +146,12 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     .navbar-nav li { margin-left: 0; width: 100%; }
     .navbar-nav a { display: block; padding: 0.5rem 0; }
     .navbar-nav a.active { border-bottom-width: 0; background-color: var(--secondary-color); }
-    .hero h1 { font-size: 2rem; }
-    .hero-page { height: 30vh; }
+    /* TÄSSÄ PÄIVITYKSET RESPONSIIVISEEN KORKEUDEEN */
+    .hero-page { 
+        height: 40vh; /* Nosta tätäkin korkeutta mobiilissa */
+        min-height: 200px; /* Vähimmäiskorkeus mobiilissa */
+    }
+    .hero h1 { font-size: 2rem; } /* Jätä tämä entiselleen */
 }
 
 /* --- Kuvan tyylittely (Tämä on se kuva Lähtöruutu-sivulla) --- */
@@ -253,4 +269,3 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
-
