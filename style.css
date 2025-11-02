@@ -81,12 +81,28 @@ body {
 .hero-page { height: 40vh; }
 .hero-page h1 { font-size: 2.5rem; }
 
-/* Taustakuvat määritellään erikseen */
-.hero-alku { background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da977511'); }
-.hero-lahtoruutu { background-image: url('https://images.unsplash.com/photo-1554141552-f74868f60f79'); }
-.hero-matkan-varrelta { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/b645930222f711ee90470242ac110002/image.jpg'); }
-.hero-synteesi { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/ba7c95e622f711ee90470242ac110002/image.jpg'); }
-.hero-eteenpain { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/c0f8df3022f711ee90470242ac110002/image.jpg'); }
+/* --- Taustakuvat (KAIKKI KORJATTU JA VAIHDETTU PYSYVIIN) --- */
+/* "Noniin." (Kompassi kartalla) */
+.hero-alku { 
+    background-image: url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2'); 
+}
+/* "Ollakko..." (Tyhjä muistikirja) */
+.hero-lahtoruutu { 
+    background-image: url('https://images.unsplash.com/photo-1484909135011-b01639f75b63'); 
+}
+/* "Suattaapi olla näin" (Mutkitteleva tie) */
+.hero-matkan-varrelta { 
+    background-image: url('https://images.unsplash.com/photo-1470770903676-69b98201ea1c'); 
+}
+/* "Niimpä tietennii!" (Piirustukset ja kypärä) */
+.hero-synteesi { 
+    background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5'); 
+}
+/* "On se tämäkin työmaa" (Polku metsään) */
+.hero-eteenpain { 
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e'); 
+}
+/* --- Kuvat päättyy --- */
 
 /* --- Sivujen sisältöalue --- */
 main { background-color: var(--light-text); padding: 3rem 0; }
@@ -110,7 +126,7 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     .hero-page { height: 30vh; }
 }
 
-/* --- Kuvan tyylittely --- */
+/* --- Kuvan tyylittely (Tämä on se kuva Lähtöruutu-sivulla) --- */
 .image-container { text-align: center; margin: 2rem 0; }
 .image-container img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto; }
 .image-caption { font-style: italic; font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
@@ -225,4 +241,3 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
-
