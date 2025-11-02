@@ -103,7 +103,7 @@ body {
 /* "Noniin." */
 .hero-alku { 
     background-image: url('images/profiili.png'); 
-    background-position: center 30%; /* Esimerkki: Yritä pitää tärkeä sisältö näkyvissä. Säädä tätä! */
+    background-position: center 35%; /* Esimerkki: Yritä pitää tärkeä sisältö näkyvissä. Säädä tätä! */
 }
 /* "Ollakko vai ollakko olematta" */
 .hero-lahtoruutu { 
@@ -269,6 +269,7 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
+
 
 
 
