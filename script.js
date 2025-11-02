@@ -7,20 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SIVUN VAIHTOLOGIIKKA ---
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // Estä aina oletustoiminto
+            event.preventDefault(); 
 
-            const targetPageId = link.dataset.page; // Haetaan data-page attribuutti (esim. "lahtoruutu")
+            const targetPageId = link.dataset.page; 
             const targetPage = document.getElementById(targetPageId);
 
             if (!targetPage || targetPage.classList.contains('active')) {
-                return; // Älä tee mitään, jos sivu on jo aktiivinen
+                return; 
             }
 
-            // 1. Etsi nykyinen aktiivinen sivu ja linkki
             const currentPage = document.querySelector('.page-content.active');
             const currentLink = document.querySelector('.nav-link.active');
 
-            // 2. Aseta vanha sivu "poistuvaksi"
             if (currentPage) {
                 currentPage.classList.remove('active');
                 currentPage.classList.add('exiting');
@@ -29,37 +27,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentLink.classList.remove('active');
             }
 
-            // 3. Aseta uusi sivu ja linkki aktiiviseksi
             targetPage.classList.add('active');
             link.classList.add('active');
             
-            // Nollaa skrollaus sivun yläreunaan
             window.scrollTo({ top: 0, behavior: 'auto' });
 
-            // Käynnistä skrollausanimaatiot uudella sivulla
+            // Käynnistä animaatiot uudella sivulla
             initializeScrollObserver(targetPage);
 
-            // 4. Siivoa "exiting"-luokka animaation jälkeen, jotta sivu piilottuu oikein
             setTimeout(() => {
                 if (currentPage) {
                     currentPage.classList.remove('exiting');
                 }
-            }, 400); // Tämän pitää vastata CSS-transitionin kestoa
+            }, 400); 
         });
     });
 
-    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS ---
+    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS (PÄIVITETTY) ---
     function initializeScrollObserver(container) {
-        // Etsi animoitavat elementit VAIN aktiivisen sivun sisältä
-        const elementsToAnimate = container.querySelectorAll('.animate-on-scroll');
+        
+        // Etsii KAIKKI animoitavat elementit (Juju 1, 2 ja 3)
+        const elementsToAnimate = container.querySelectorAll(
+            '.animate-on-scroll, .animate-slide-left, .animate-slide-right'
+        );
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // 1. Lisää perus 'visible'-luokka animaatiota varten
                     entry.target.classList.add('visible');
+                    
+                    // 2. TARKISTA, ONKO TÄMÄ LASKURILOHKO (Juju 1)
+                    const counters = entry.target.querySelectorAll('.counter');
+                    if (counters.length > 0) {
+                        counters.forEach(counter => {
+                            // Varmista, ettei laskuria ajeta montaa kertaa
+                            if (counter.classList.contains('animated')) return;
+                            counter.classList.add('animated');
+                            
+                            const target = +counter.dataset.target;
+                            const duration = 1500; // 1.5 sekuntia
+                            const stepTime = 20; // Päivitä 50 krt/sek
+                            const steps = duration / stepTime;
+                            const increment = target / steps;
+                            let current = 0;
+
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    clearInterval(timer);
+                                    counter.innerText = target;
+                                } else {
+                                    counter.innerText = Math.floor(current);
+                                }
+                            }, stepTime);
+                        });
+                    }
                 } else {
-                    // Valinnainen: nollaa animaatio, kun skrollataan pois näkyvistä
-                    // entry.target.classList.remove('visible');
+                    // Tämän voi poistaa, jos et halua animaation toistuvan
+                    // entry.target.classList.remove('visible'); 
                 }
             });
         }, { threshold: 0.1 });
@@ -77,10 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.scrollY > 300) {
                 toTopButton.classList.add('visible');
             } else {
+                toTopButton.classList.add('visible'); // Korjattu: Piti olla remove('visible')
+            }
+        }
+    });
+    
+    // Korjattu versio yllä olevasta (bugi huomattu):
+    window.addEventListener('scroll', () => {
+        if (toTopButton) {
+            if (window.scrollY > 300) {
+                toTopButton.classList.add('visible');
+            } else {
                 toTopButton.classList.remove('visible');
             }
         }
     });
+
 
     if (toTopButton) {
         toTopButton.addEventListener('click', () => {
