@@ -81,26 +81,29 @@ body {
 .hero-page { height: 40vh; }
 .hero-page h1 { font-size: 2.5rem; }
 
-/* --- Taustakuvat (KORJATTU PYSYVILLÄ TEEMAKUVILLA) --- */
-/* "Noniin." (Kompassi kartalla) */
+/* --- Taustakuvat (PÄIVITETTY KÄYTTÄMÄÄN PAIKALLISIA TIEDOSTOJA) --- */
+/* Oletus: kaikki kuvat ovat 'images'-kansiossa */
+
+/* "Noniin." */
 .hero-alku { 
-    background-image: url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2'); 
+    /* Käytetään profiili.png/jpg, sillä se on hyvä aloitussivuun */
+    background-image: url('images/profiili.jpg'); 
 }
-/* "Ollakko..." (Mies pohtimassa järvellä) */
+/* "Ollakko vai ollakko olematta" */
 .hero-lahtoruutu { 
-    background-image: url('https://images.unsplash.com/photo-1505506874110-6a7a69069a08');
+    background-image: url('images/ollakkovaiollakko.png');
 }
-/* "Suattaapi olla näin" (Sumuinen, haarautuva polku) */
+/* "Suattaapi olla näin" */
 .hero-matkan-varrelta { 
-    background-image: url('https://images.unsplash.com/photo-1440404653325-ab127d490ace');
+    background-image: url('images/suottaapiolla.png');
 }
-/* "Niimpä tietennii!" (Piirustukset ja työkalut) */
+/* "Niimpä tietennii!" */
 .hero-synteesi { 
-    background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158');
+    background-image: url('images/Niimpatietennii.png');
 }
-/* "On se tämäkin työmaa" (Nosturi ja työmaa auringonlaskussa) */
+/* "On se tämäkin työmaa" */
 .hero-eteenpain { 
-    background-image: url('https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a');
+    background-image: url('images/Onsetyomaa.png');
 }
 /* --- Kuvat päättyy --- */
 
