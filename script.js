@@ -1,90 +1,77 @@
-// Odotetaan, että koko DOM on valmis
 document.addEventListener('DOMContentLoaded', () => {
 
-    const contentContainer = document.getElementById('content-container');
     const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page-content');
     const toTopButton = document.getElementById('to-top-btn');
 
-    // --- SISÄLLÖN LATAUSFUNKTIO ---
-    // Tämä on uusi pääfunktio, joka hakee ja näyttää sisällön
-    async function loadContent(url, activateLink) {
-        try {
-            // Lisää "poistumis"-animaatio vanhalle sisällölle
-            contentContainer.classList.add('page-is-exiting');
-
-            // Odota animaation päättymistä
-            await new Promise(resolve => setTimeout(resolve, 300)); 
-
-            // Hae uusi sisältö
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Sivun lataus epäonnistui.');
-            }
-            const html = await response.text();
-
-            // Vaihda sisältö ja poista "poistumis"-tila
-            contentContainer.innerHTML = html;
-            contentContainer.classList.remove('page-is-exiting');
-
-            // Lisää "saapumis"-animaatio
-            contentContainer.classList.add('page-is-entering');
-            
-            // Skrollaa sivun ylälaitaan
-            window.scrollTo({ top: 0, behavior: 'auto' });
-
-            // Alusta skrollausanimaatiot uudelle sisällölle
-            initializeScrollObserver();
-            
-            // Päivitä aktiivinen linkki navigaatiossa
-            if (activateLink) {
-                updateActiveLink(activateLink);
-            }
-
-            // Poista "saapumis"-animaatioluokka hetken päästä
-            setTimeout(() => {
-                contentContainer.classList.remove('page-is-entering');
-            }, 500);
-
-        } catch (error) {
-            console.error('Virhe sisällön lataamisessa:', error);
-            contentContainer.innerHTML = '<p>Sisällön lataaminen epäonnistui. Yritä päivittää sivu.</p>';
-            contentContainer.classList.remove('page-is-exiting');
-        }
-    }
-
-    // --- NAVIGAATION KÄSITTELY ---
+    // --- SIVUN VAIHTOLOGIIKKA ---
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // Estä normaali sivunvaihto
-            const url = link.href;
-            loadContent(url, link); // Lataa sisältö ja aktivoi tämä linkki
+            event.preventDefault(); // Estä aina oletustoiminto
+
+            const targetPageId = link.dataset.page; // Haetaan data-page attribuutti (esim. "lahtoruutu")
+            const targetPage = document.getElementById(targetPageId);
+
+            if (!targetPage || targetPage.classList.contains('active')) {
+                return; // Älä tee mitään, jos sivu on jo aktiivinen
+            }
+
+            // 1. Etsi nykyinen aktiivinen sivu ja linkki
+            const currentPage = document.querySelector('.page-content.active');
+            const currentLink = document.querySelector('.nav-link.active');
+
+            // 2. Aseta vanha sivu "poistuvaksi"
+            if (currentPage) {
+                currentPage.classList.remove('active');
+                currentPage.classList.add('exiting');
+            }
+            if (currentLink) {
+                currentLink.classList.remove('active');
+            }
+
+            // 3. Aseta uusi sivu ja linkki aktiiviseksi
+            targetPage.classList.add('active');
+            link.classList.add('active');
+            
+            // Nollaa skrollaus sivun yläreunaan
+            window.scrollTo({ top: 0, behavior: 'auto' });
+
+            // Käynnistä skrollausanimaatiot uudella sivulla
+            initializeScrollObserver(targetPage);
+
+            // 4. Siivoa "exiting"-luokka animaation jälkeen, jotta sivu piilottuu oikein
+            setTimeout(() => {
+                if (currentPage) {
+                    currentPage.classList.remove('exiting');
+                }
+            }, 400); // Tämän pitää vastata CSS-transitionin kestoa
         });
     });
 
-    // Päivitä mikä linkki näkyy aktiivisena
-    function updateActiveLink(activeLink) {
-        navLinks.forEach(link => link.classList.remove('active'));
-        activeLink.classList.add('active');
-    }
+    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS ---
+    function initializeScrollObserver(container) {
+        // Etsi animoitavat elementit VAIN aktiivisen sivun sisältä
+        const elementsToAnimate = container.querySelectorAll('.animate-on-scroll');
 
-    // --- SCROLL-ANIMAATIOIDEN ALUSTUS ---
-    // Tämä pitää nyt ajaa joka kerta kun uusi sisältö ladataan
-    function initializeScrollObserver() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                } else {
+                    // Valinnainen: nollaa animaatio, kun skrollataan pois näkyvistä
+                    // entry.target.classList.remove('visible');
                 }
             });
         }, { threshold: 0.1 });
 
-        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
         elementsToAnimate.forEach(el => observer.observe(el));
     }
 
+    // Käynnistä animaatiot oletuksena näkyvälle "alku"-sivulle heti alussa
+    initializeScrollObserver(document.getElementById('alku'));
+
 
     // --- "TAKAISIN YLÖS" -NAPPI ---
-    // Tämä pysyy samana, mutta toimii nyt koko sivustolla
     window.addEventListener('scroll', () => {
         if (toTopButton) {
             if (window.scrollY > 300) {
@@ -100,9 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-
-    // --- ALOITUSSIVUN LATAUS ---
-    // Ladataan etusivun sisältö heti kun sivu avataan
-    loadContent('index-content.html', document.querySelector('.nav-link[data-page="index-content"]'));
-
 });
