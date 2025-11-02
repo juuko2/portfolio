@@ -84,9 +84,9 @@ body {
 /* Taustakuvat määritellään erikseen */
 .hero-alku { background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da977511'); }
 .hero-lahtoruutu { background-image: url('https://images.unsplash.com/photo-1554141552-f74868f60f79'); }
-.hero-matkan-varrelta { background-image: url('https://images.unsplash.com/photo-1557682223-38e551c6b650'); }
-.hero-synteesi { background-image: url('https://images.unsplash.com/photo-1528731708813-c655b68633e0'); }
-.hero-eteenpain { background-image: url('https://images.unsplash.com/photo-1534447677768-be436a097959'); }
+.hero-matkan-varrelta { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/b645930222f711ee90470242ac110002/image.jpg'); }
+.hero-synteesi { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/ba7c95e622f711ee90470242ac110002/image.jpg'); }
+.hero-eteenpain { background-image: url('https://cdn.image.fusionbrain.ai/static/generation/c0f8df3022f711ee90470242ac110002/image.jpg'); }
 
 /* --- Sivujen sisältöalue --- */
 main { background-color: var(--light-text); padding: 3rem 0; }
@@ -225,3 +225,4 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
+
