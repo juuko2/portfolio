@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             counter.classList.add('animated');
                             
                             const target = +counter.dataset.target;
-                            const duration = 4500; // 4.5 sekuntia
+                            const duration = 1500; // 1.5 sekuntia
                             const stepTime = 20; // Päivitä 50 krt/sek
                             const steps = duration / stepTime;
                             const increment = target / steps;
@@ -97,28 +97,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeScrollObserver(document.getElementById('alku'));
 
 
-    // --- "TAKAISIN YLÖS" -NAPPI ---
+    // --- "TAKAISIN YLÖS" -NAPPI (KORJATTU) ---
     window.addEventListener('scroll', () => {
         if (toTopButton) {
             if (window.scrollY > 300) {
                 toTopButton.classList.add('visible');
             } else {
-                toTopButton.classList.add('visible'); // Korjattu: Piti olla remove('visible')
+                // TÄMÄ ON KORJATTU: Piti olla 'remove'
+                toTopButton.classList.remove('visible'); 
             }
         }
     });
-    
-    // Korjattu versio yllä olevasta (bugi huomattu):
-    window.addEventListener('scroll', () => {
-        if (toTopButton) {
-            if (window.scrollY > 300) {
-                toTopButton.classList.add('visible');
-            } else {
-                toTopButton.classList.remove('visible');
-            }
-        }
-    });
-
 
     if (toTopButton) {
         toTopButton.addEventListener('click', () => {
