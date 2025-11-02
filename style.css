@@ -103,12 +103,12 @@ body {
 /* "Noniin." */
 .hero-alku { 
     background-image: url('images/profiili.jpg'); 
-    background-position: center 25%; /* Esimerkki: Yritä pitää tärkeä sisältö näkyvissä. Säädä tätä! */
+    background-position: center 10%; /* Esimerkki: Yritä pitää tärkeä sisältö näkyvissä. Säädä tätä! */
 }
 /* "Ollakko vai ollakko olematta" */
 .hero-lahtoruutu { 
     background-image: url('images/ollakkovaiollakko.png');
-    background-position: center 60%; /* Esimerkki: Kokeile pitää yläosa näkyvissä paremmin. Säädä tätä! */
+    background-position: center 30%; /* Esimerkki: Kokeile pitää yläosa näkyvissä paremmin. Säädä tätä! */
 }
 /* "Suattaapi olla näin" */
 .hero-matkan-varrelta { 
@@ -123,7 +123,7 @@ body {
 /* "On se tämäkin työmaa" */
 .hero-eteenpain { 
     background-image: url('images/Onsetyomaa.png');
-    background-position: center 60%; /* Esimerkki: Jos tärkeä sisältö on hieman keskikohdan alapuolella. Säädä tätä! */
+    background-position: center 20%; /* Esimerkki: Jos tärkeä sisältö on hieman keskikohdan alapuolella. Säädä tätä! */
 }
 /* --- Kuvat päättyy --- */
 
@@ -269,3 +269,4 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
+
