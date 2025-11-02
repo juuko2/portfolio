@@ -226,4 +226,91 @@ main {
     .hero-page {
         height: 30vh;
     }
+/* --- LISÄTYT SILMÄKARKKI- JA JS-TYYLIT --- */
+
+/* --- Parannus 1: Animoitu alleviivaus navigaatiossa --- */
+.navbar-nav a {
+    position: relative; /* Tarvitaan ::after-elementin paikantamiseen */
+    /* Poistetaan vanha reunaviiva, jos se on vielä olemassa */
+    border-bottom: 3px solid transparent; 
+    padding-bottom: 5px;
 }
+
+/* Tämä luo "piilotetun" alleviivauksen */
+.navbar-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0; /* Aluksi leveys on nolla */
+    height: 3px;
+    background-color: var(--accent-color); /* Käytä korostusväriä */
+    bottom: 0; /* Aseta viiva alas */
+    left: 50%; /* Aloita keskeltä */
+    transform: translateX(-50%); /* Tasaa keskelle */
+    transition: width 0.3s ease-in-out; /* Tässä on animaatio! */
+}
+
+/* Kun hiiren vie päälle, kasvata leveys 100% */
+.navbar-nav a:hover::after {
+    width: 100%;
+}
+
+/* Korjataan aktiivisen linkin tyyli */
+.navbar-nav a.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color); /* Näytä pysyvä viiva aktiivisella */
+}
+
+/* Älä näytä hover-efektiä aktiivisella linkillä */
+.navbar-nav a.active:hover::after {
+    width: 0;
+}
+
+
+/* --- Parannus 2: "Fade-in on Scroll" -tyylit --- */
+
+/* Tämä on elementtien oletustila (piilossa) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px); /* Tulee hieman alhaalta ylös */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Tämä luokka lisätään JavaScriptillä, kun elementti tulee näkyviin */
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Parannus 3: "Takaisin ylös" -napin tyylit --- */
+#to-top-btn {
+    position: fixed; /* Pysyy paikallaan selatessa */
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Täysin pyöreä */
+    width: 50px;
+    height: 50px;
+    font-size: 24px; /* Isompi nuoli */
+    line-height: 50px; /* Keskittää nuolen pystysuunnassa */
+    text-align: center;
+    cursor: pointer;
+    opacity: 0; /* Oletuksena piilossa */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+/* Tämä luokka lisätään JS:llä, kun nappi pitää näyttää */
+#to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Pieni hover-efekti napille */
+#to-top-btn:hover {
+    background-color: var(--accent-color);
+}}
+
