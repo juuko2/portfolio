@@ -81,28 +81,29 @@ body {
 .hero-page { height: 40vh; }
 .hero-page h1 { font-size: 2.5rem; }
 
-/* --- Taustakuvat (KAIKKI KORJATTU JA VAIHDETTU PYSYVIIN) --- */
-/* "Noniin." (Kompassi kartalla) */
+/* --- Taustakuvat (PÄIVITETTY HAHMOLLA JA TEEMOILLA) --- */
+/* "Noniin." (Hahmo katsoo eteenpäin, kompassi tai kartta taustalla) */
 .hero-alku { 
-    background-image: url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2'); 
+    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/ed582e0e2a2511eea7b60242ac110002/image.jpg'); 
 }
-/* "Ollakko..." (Tyhjä muistikirja) */
+/* "Ollakko..." (Hahmo mietteliäänä tyhjän muistikirjan edessä) */
 .hero-lahtoruutu { 
-    background-image: url('https://images.unsplash.com/photo-1484909135011-b01639f75b63'); 
+    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/f228b7a62a2511eea7b60242ac110002/image.jpg');
 }
-/* "Suattaapi olla näin" (Mutkitteleva tie) */
+/* "Suattaapi olla näin" (Hahmo polun haarassa sumuisessa metsässä) */
 .hero-matkan-varrelta { 
-    background-image: url('https://images.unsplash.com/photo-1470770903676-69b98201ea1c'); 
+    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/f90f6b382a2511eea7b60242ac110002/image.jpg');
 }
-/* "Niimpä tietennii!" (Piirustukset ja kypärä) */
+/* "Niimpä tietennii!" (Hahmo keskittyneenä piirustuspöydän ääressä) */
 .hero-synteesi { 
-    background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5'); 
+    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/17855b722a2611eea7b60242ac110002/image.jpg');
 }
-/* "On se tämäkin työmaa" (Polku metsään) */
+/* "On se tämäkin työmaa" (Hahmo työmaan reunalla auringonlaskussa) */
 .hero-eteenpain { 
-    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e'); 
+    background-image: url('https://cdn.image.fusionbrain.ai/static/generation/1d2e2b962a2611eea7b60242ac110002/image.jpg');
 }
 /* --- Kuvat päättyy --- */
+
 
 /* --- Sivujen sisältöalue --- */
 main { background-color: var(--light-text); padding: 3rem 0; }
