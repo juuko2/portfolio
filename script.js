@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             counter.classList.add('animated');
                             
                             const target = +counter.dataset.target;
-                            const duration = 1500; // 1.5 sekuntia
+                            const duration = 4500; // 4.5 sekuntia
                             const stepTime = 20; // Päivitä 50 krt/sek
                             const steps = duration / stepTime;
                             const increment = target / steps;
