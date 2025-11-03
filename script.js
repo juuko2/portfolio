@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const navLinks = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page-content');
+    const pages = document.querySelectorAll('.page-content'); // Tämä ei välttämättä tarvita tässä, mutta ok jättää
     const toTopButton = document.getElementById('to-top-btn');
     const hamburgerMenu = document.querySelector('.hamburger-menu'); 
     const navLinksContainer = document.querySelector('.nav-links-container'); 
@@ -50,19 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 // Odotetaan, että poistumisanimaatio on valmis, ENNEN KUIN sivu piilotetaan.
-                setTimeout(() => {
+                // Käytetään 'transitionend' -tapahtumaa, jos se on käytettävissä, muuten setTimeout.
+                const handleTransitionEnd = () => {
+                    currentPage.removeEventListener('transitionend', handleTransitionEnd);
                     currentPage.classList.remove('active', 'exiting');
                     currentPage.style.display = 'none'; // Piilota vanha sivu kokonaan
-                    
-                    // Vaihe 2: Näytä ja aktivoi uusi sivu vasta, kun vanha on piilotettu
-                    showAndActivateNewPage();
-                }, transitionDuration);
+                    showAndActivateNewPage(); // Kutsu uuden sivun näyttämistä
+                };
+
+                // Jos sivulla on CSS-animaatioita, odota niiden päättymistä
+                // Jos ei, tai jos selain ei tue transitionend-tapahtumaa luotettavasti, käytä setTimeoutia.
+                // Tämä on robustimpi ratkaisu.
+                setTimeout(() => {
+                    if (currentPage.classList.contains('exiting')) { // Tarkista onko luokka vielä päällä
+                         handleTransitionEnd();
+                    }
+                }, transitionDuration + 50); // Pieni lisäviive varmuuden vuoksi
 
             } else { // Jos ei ole aktiivista sivua (esim. ensimmäinen lataus)
                 showAndActivateNewPage();
             }
 
             function showAndActivateNewPage() {
+                // Piilota KAIKKI sivut ensin varmuuden vuoksi
+                pages.forEach(p => p.style.display = 'none'); // Lisätty tämä rivi
+
                 targetPage.style.display = 'block'; // Tee uusi sivu näkyväksi ensin
                 
                 // Pieni viive, jotta selain ehtii varmasti renderöidä display:blockin, ennen kuin luokka lisätään.
