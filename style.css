@@ -28,15 +28,55 @@ body {
     top: 0;
     z-index: 100;
 }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.navbar .container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; /* Salli elementtien rivittyä mobiilissa */
+}
 .navbar-brand {
     font-family: var(--header-font);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
+    flex-grow: 1; /* Vie tilaa niin paljon kuin mahdollista vasemmalle */
 }
-.navbar-nav { display: flex; list-style: none; }
+
+/* --- HAMBURGER-VALIKKO (ALASVETOVALIKKO) --- */
+.hamburger-menu {
+    display: none; /* Oletuksena piilossa tietokoneella */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 101; /* Varmista, että on nav-linkkien päällä */
+}
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* Muotoilu, kun valikko on auki (risti-ikoni) */
+.hamburger-menu.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
+.hamburger-menu.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.nav-links-container {
+    width: 100%; /* Vie koko leveys mobiilissa */
+    display: flex;
+    justify-content: flex-end; /* Kohdista oikealle työpöydällä */
+}
+.navbar-nav { 
+    display: flex; 
+    list-style: none; 
+    width: auto; /* Palauta oletusleveys työpöydällä */
+}
 .navbar-nav li { margin-left: 20px; }
 .navbar-nav a {
     text-decoration: none;
@@ -49,19 +89,7 @@ body {
     cursor: pointer;
 }
 
-/* --- TAVALLINEN NAVIGAATIO TYÖPÖYTÄNÄKYMÄÄN --- */
-/* Tämä piilotetaan @media-kyselyssä mobiilissa */
-.nav-links-container {
-    display: block; /* Oletuksena näkyvissä */
-}
-/* --- Hampurilaisvalikko PIILOSSA TYÖPÖYDÄLLÄ --- */
-.hamburger-menu {
-    display: none; /* Piilotettu oletuksena */
-}
-
-
-/* --- SIVUN SISÄLLÖN VAIHTOLOGIIKKA (VAIN TYÖPÖYTÄ) --- */
-/* Nämä tyylit ylikirjoitetaan mobiilissa */
+/* --- UUSI SISÄLLÖN VAIHTOLOGIIKKA --- */
 #content-container {
     position: relative;
     width: 100%;
@@ -84,29 +112,30 @@ body {
     width: 100%;
     opacity: 0;
     transform: translateY(-15px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Lisätty poistumisanimaatio */
 }
-
 
 /* --- Hero-bannerit --- */
 .hero {
     color: var(--light-text);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
     position: relative;
     text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
 }
+
 .hero-page { 
     height: 50vh; 
     min-height: 250px; 
 }
 .hero-page h1 { font-size: 2.5rem; }
+
 
 /* --- Taustakuvat --- */
 .hero-alku { 
@@ -130,6 +159,7 @@ body {
     background-position: center 35%; 
 }
 
+
 /* --- LISÄYS: Täysleveä kuvalohko Yle-tyyliin --- */
 .full-width-media {
     position: relative;
@@ -144,17 +174,20 @@ body {
     margin-bottom: 3rem;
     background-size: cover;
     background-position: center center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
     background-attachment: fixed; 
     color: var(--light-text);
     display: flex;
     align-items: flex-end; 
 }
+
+/* Teksti, joka rullautuu kuvan yli */
 .media-caption {
     width: 100%;
     padding: 2rem;
     background: rgba(0, 0, 0, 0.4); 
 }
+
 .media-caption p {
     max-width: 960px;
     margin: 0 auto;
@@ -175,6 +208,74 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 /* --- Alapalkki --- */
 .footer { background-color: var(--dark-text); color: var(--light-text); text-align: center; padding: 2rem 0; margin-top: 3rem; }
 
+/* --- Responsiivisuus --- */
+@media (max-width: 768px) {
+    .navbar .container { 
+        flex-wrap: wrap; 
+        justify-content: space-between; /* Brand ja hamppari eri päihin */
+        align-items: center;
+    }
+    .navbar-brand {
+        flex-grow: 0; /* Estä brändiä viemästä kaikkea tilaa */
+    }
+
+    /* Näytä hampurilaisvalikko mobiilissa */
+    .hamburger-menu {
+        display: block; 
+    }
+
+    /* Piilota navigaatiolinkit oletuksena mobiilissa */
+    .nav-links-container {
+        max-height: 0; /* Piilota sisällön avulla */
+        overflow: hidden; /* Piilota ylivuoto */
+        transition: max-height 0.3s ease-out; /* Animaatio */
+        flex-basis: 100%; /* Vie koko leveys navigaatiossa */
+        margin-top: 1rem;
+    }
+
+    /* Näytä navigaatiolinkit, kun valikko on auki */
+    .nav-links-container.active {
+        max-height: 300px; /* Tarpeeksi suuri arvo, että kaikki linkit näkyvät */
+        /* max-height: 500px; Kokeile tätä, jos 300px ei riitä */
+        
+    }
+
+    .navbar-nav { 
+        flex-direction: column; 
+        width: 100%; 
+        background-color: var(--secondary-color); /* Erottele taustaväri */
+        padding: 1rem 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .navbar-nav li { 
+        margin-left: 0; 
+        width: 100%; 
+        text-align: center; /* Keskitä linkit */
+        padding: 0.5rem 0;
+    }
+    .navbar-nav a { 
+        display: block; 
+        padding: 0.5rem 0; 
+        border-bottom: none; /* Poista alleviivaus mobiililinkeistä */
+    }
+    .navbar-nav a.active { 
+        background-color: var(--primary-color); 
+        color: var(--light-text);
+        border-radius: 5px;
+        margin: 0 10px; /* Pieni marginaali sivuille */
+        border-bottom: none; 
+    }
+    .navbar-nav a.active:hover::after { width: 0; } /* Poista hover-efekti aktiivisesta mobiililinkistä */
+
+
+    .hero-page { 
+        height: 40vh; 
+        min-height: 200px; 
+    }
+    .hero h1 { font-size: 2rem; } 
+}
+
 /* --- Kuvan tyylittely --- */
 .image-container { text-align: center; margin: 2rem 0; }
 .image-container img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto; }
@@ -191,7 +292,6 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 #to-top-btn.visible { opacity: 1; visibility: visible; }
 #to-top-btn:hover { background-color: var(--accent-color); }
 
-
 /*
 --- UUDET JUJUT ALKAVAT TÄSTÄ ---
 */
@@ -202,6 +302,8 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     transform: translateY(20px); 
     transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
 }
+
+/* --- Juju 3: Monipuolisemmat skrollausanimaatiot --- */
 .animate-slide-left {
     opacity: 0;
     transform: translateX(-50px);
@@ -228,6 +330,7 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
+/* Asetelma 3 laskurille */
 .counter-container {
     display: flex;
     justify-content: space-around;
@@ -249,6 +352,14 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 0.9rem;
     color: #666;
     margin: 0;
+}
+@media (max-width: 768px) {
+    .counter-container {
+        flex-direction: column;
+    }
+    .counter-box {
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* --- Juju 2: Interaktiiviset kortit --- */
@@ -279,108 +390,4 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 .info-card p {
     font-size: 1rem;
     margin-bottom: 0;
-}
-
-/* --- MEDIA QUERY MOBIILINÄKYMÄÄN (< 768px) --- */
-@media (max-width: 768px) {
-    /* --- NAVIGAATIO MOBIILISSA --- */
-    .navbar .container { 
-        flex-direction: row; /* Takaisin riviin, jotta brändi ja valikko ovat rinnakkain */
-        justify-content: space-between; /* Brändi vasemmalla, valikko oikealla */
-        align-items: center;
-    }
-    .navbar-brand { order: 1; } /* Brändi ensin */
-
-    .hamburger-menu {
-        display: flex; /* Näytä hampurilaisvalikko mobiilissa */
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        z-index: 101; /* Varmista, että valikko on päällä */
-        order: 2; /* Hampurilaiskuvake toisena (oikealla) */
-    }
-    .hamburger-menu .bar {
-        width: 100%;
-        height: 3px;
-        background-color: var(--primary-color);
-        transition: all 0.3s ease-in-out;
-    }
-    /* Animaatio kun valikko on auki (X-muoto) */
-    .hamburger-menu.active .bar:nth-child(2) {
-        opacity: 0; /* Keskimmäinen palkki katoaa */
-    }
-    .hamburger-menu.active .bar:nth-child(1) {
-        transform: translateY(11px) rotate(45deg);
-    }
-    .hamburger-menu.active .bar:nth-child(3) {
-        transform: translateY(-11px) rotate(-45deg);
-    }
-
-    .nav-links-container {
-        display: none; /* Oletuksena piilossa mobiilissa */
-        position: absolute;
-        top: 100%; /* Navigaatiopalkin alapuolella */
-        left: 0;
-        width: 100%;
-        background-color: var(--light-text);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        z-index: 99;
-        flex-direction: column; /* Linkit allekkain */
-        border-top: 1px solid #ddd;
-        max-height: 0; /* Piilotettu korkeuden avulla */
-        overflow: hidden; /* Piilota ylivuoto */
-        transition: max-height 0.4s ease-in-out; /* Animaatio avattaessa */
-    }
-    .nav-links-container.active {
-        display: flex; /* Näytä, kun aktiivinen */
-        max-height: 300px; /* Tarpeeksi korkea kaikki linkit (säädä tarvittaessa) */
-    }
-    .navbar-nav { 
-        flex-direction: column; 
-        width: 100%; 
-        margin-top: 0; 
-        padding: 1rem 0; /* Pientä täytettä valikon sisään */
-    }
-    .navbar-nav li { margin-left: 0; width: 100%; text-align: center; }
-    .navbar-nav a { 
-        display: block; 
-        padding: 0.8rem 0; 
-        border-bottom: none; /* Poista alleviivaus mobiilissa */
-    }
-    .navbar-nav a.active { 
-        background-color: var(--secondary-color); 
-        color: var(--primary-color);
-    }
-    .navbar-nav a::after { content: none; } /* Poista alleviivausanimaatio mobiilissa */
-
-    /* --- SIVUN SISÄLLÖN KÄYTTÄYTYMINEN MOBIILISSA --- */
-    .page-content {
-        display: block; /* Kaikki sivut näkyvillä ja rullattavissa */
-        opacity: 1; /* Poista fade-in/out animaatiot sivunvaihdoista */
-        transform: translateY(0); /* Poista slidet-animaatiot sivunvaihdoista */
-        position: static; /* Poista absolute-positioning */
-        /* Poista transtion, jotta animaatiot eivät häiritse scrollausta */
-        transition: none; 
-    }
-    /* Poista hero-bannerien fixed-attachment mobiilissa */
-    .hero {
-        background-attachment: scroll;
-    }
-    .full-width-media {
-        background-attachment: scroll; /* Myös tämä rullaa mobiilissa */
-    }
-
-    .hero-page { 
-        height: 30vh; /* Alennettu korkeus mobiilissa */
-        min-height: 150px; 
-    }
-    .hero h1 { font-size: 2rem; }
-
-    .counter-container { flex-direction: column; }
-    .counter-box { margin-bottom: 1.5rem; }
 }
