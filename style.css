@@ -255,11 +255,11 @@ main { background-color: var(--light-text); padding: 3rem 0; }
         color: var(--dark-text); 
     }
     .navbar-nav a.active { 
-        background-color: var(--primary-color); 
-        color: var(--light-text); 
-        border-radius: 5px;
-        margin: 0 10px; 
-        border-bottom: none; 
+    background-color: var(--primary-color); 
+    color: var(--light-text) !important; /* Varmistaa valkoisen värin mobiilissa */
+    border-radius: 5px;
+    margin: 0 10px; 
+    border-bottom: none; 
     }
     .navbar-nav a.active:hover::after { width: 0; } 
 
@@ -386,3 +386,4 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
+
