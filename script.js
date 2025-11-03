@@ -117,23 +117,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const observerOptions = {
             root: null, 
             rootMargin: '0px',
-            threshold: 0.1 
+            threshold: 0.7 // Muutettu 0.1 -> 0.7. Animaatio alkaa, kun vähintään 70% elementistä näkyy.
         };
 
         currentObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    if (entry.target.classList.contains('counter-section')) {
-                        const counters = entry.target.querySelectorAll('.counter');
-                        counters.forEach(counter => {
-                            if (!counter.classList.contains('animated')) {
-                                counter.classList.add('animated'); 
-                                animateCounter(counter);
-                            }
-                        });
-                    }
-                } 
+                    // Vain jos elementti ei ole jo animoitu (estää toistuvat animaatiot)
+                    if (!entry.target.classList.contains('visible')) {
+                        const delay = window.innerWidth > 768 ? 200 : 0; // 200ms viive työpöydällä, ei viivettä mobiilissa
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                            // ... (muu logiikka, joka oli if (entry.isIntersecting) -lohkon sisällä)
+                            if (entry.target.classList.contains('counter-section')) {
+                                const counters = entry.target.querySelectorAll('.counter');
+                                counters.forEach(counter => {
+                                    if (!counter.classList.contains('animated')) {
+                                        counter.classList.add('animated'); 
+                                        animateCounter(counter);
+                                  }
+                             });
+                        }
+              }, delay);
+    }
+}
             });
         }, observerOptions);
 
