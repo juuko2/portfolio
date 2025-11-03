@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
     const toTopButton = document.getElementById('to-top-btn');
 
-    // --- SIVUN VAIHTOLOGIIKKA ---
+    // --- SIVUN VAIHTOLOGIIKKA (KORJATTU) ---
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault(); 
@@ -13,44 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPage = document.getElementById(targetPageId);
 
             if (!targetPage || targetPage.classList.contains('active')) {
-                return; // Estä navigointi, jos kohdesivu on jo aktiivinen
+                return; 
             }
 
             const currentPage = document.querySelector('.page-content.active');
             const currentLink = document.querySelector('.nav-link.active');
+            
+            const transitionDuration = 400; // Vastaa CSS:n transition kestoa .page-content.exiting
 
-            // 1. Piilota nykyinen sivu ja sen aktiivinen linkki
+            // 1. Piilota nykyinen sivu
             if (currentPage) {
-                currentPage.classList.add('exiting'); // Aloita poistumisanimaatio
-                currentLink.classList.remove('active'); // Poista aktiivinen tila linkistä
+                currentPage.classList.add('exiting');
+                currentLink.classList.remove('active');
+
+                setTimeout(() => {
+                    currentPage.classList.remove('active', 'exiting');
+                    currentPage.style.display = 'none'; 
+                }, transitionDuration);
             }
             
-            // 2. Odota vanhan sivun poistumisanimaation loppumista
-            // tai käsittele uuden sivun näyttäminen, jos vanhaa ei ole
-            const transitionDuration = 400; // Vastaa CSS:n transition kestoa .page-content.exiting -luokalle
+            // 2. Näytä uusi sivu heti ja odota sen aktivointia
+            targetPage.style.display = 'block'; 
 
             setTimeout(() => {
-                if (currentPage) {
-                    currentPage.classList.remove('active', 'exiting'); // Poista kaikki aktiiviluokat vanhalta sivulta
-                    currentPage.style.display = 'none'; // Piilota vanha sivu kokonaan animaation jälkeen
-                }
-
-                // 3. Näytä uusi sivu
-                targetPage.style.display = 'block'; // Tee uusi sivu näkyväksi ensin
-                // Pieni viive, jotta selain rekisteröi display:blockin ennen opacity/transform muutoksia
-                setTimeout(() => {
-                    targetPage.classList.add('active'); // Aktivoi uusi sivu ja käynnistä sisääntuloanimaatio
-                    link.classList.add('active'); // Aktivoi uusi linkki navigaatiossa
-                    
-                    window.scrollTo({ top: 0, behavior: 'auto' }); // Skrollaa ylös
-                    resetAndInitializeScrollObserver(targetPage); // Alusta animaatiot uudelle sivulle
-                }, 10); // Todella lyhyt viive, vain varmistamaan renderöinnin
+                targetPage.classList.add('active'); 
+                link.classList.add('active'); 
                 
-            }, transitionDuration); // Odota vanhan sivun animaation loppumista
+                window.scrollTo({ top: 0, behavior: 'auto' }); 
+                resetAndInitializeScrollObserver(targetPage); 
+            }, 10); 
         });
     });
 
-    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS & RESETOINTI SIVUNVAIHDOSSA ---
+    // --- SKROLLAUSANIMAATIOIDEN ALUSTUS & RESETOINTI ---
     let currentObserver = null; 
 
     function resetAndInitializeScrollObserver(container) {
@@ -58,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentObserver.disconnect();
         }
 
-        // Resetooidaan kaikki animoitavat elementit piiloon uudelleen
-        const allAnimatableElements = container.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right');
+        const allAnimatableElements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right');
         allAnimatableElements.forEach(el => {
             el.classList.remove('visible'); 
             if (el.classList.contains('counter-section')) {
@@ -93,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
                     }
-                    // observer.unobserve(entry.target); // Jos haluat animaation vain kerran
                 } 
             });
         }, observerOptions);
@@ -131,14 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Alustetaan animaatiot ja laskurit aloitussivulle latauksen yhteydessä
-    // Varmistetaan, että aktiivinen sivu on "alku" heti latauksessa
     const initialPage = document.getElementById('alku');
     if (initialPage) {
-        initialPage.classList.add('active'); // Varmista, että alkuperäinen sivu on aktiivinen
-        initialPage.style.display = 'block'; // Ja näkyvissä
+        if (!initialPage.classList.contains('active')) {
+            initialPage.classList.add('active');
+        }
+        initialPage.style.display = 'block';
         resetAndInitializeScrollObserver(initialPage);
     }
-
 
     // --- "TAKAISIN YLÖS" -NAPPI ---
     window.addEventListener('scroll', () => {
