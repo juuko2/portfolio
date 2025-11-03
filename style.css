@@ -55,25 +55,24 @@ body {
     width: 100%;
 }
 .page-content {
-    display: none; /* Oletusarvoisesti piilossa */
+    display: none;
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Sisääntuloanimaatio */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 .page-content.active {
-    display: block; /* Aktiivinen sivu näkyviin */
+    display: block;
     opacity: 1;
     transform: translateY(0);
 }
 .page-content.exiting {
-    position: absolute; /* Estää layoutin pomppimisen */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     opacity: 0;
-    transform: translateY(-15px); /* Poistumisanimaatio */
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Poistumisanimaatio */
-}
+    transform: translateY(-15px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Lisätty poistumisanimaatio */
 }
 
 /* --- Hero-bannerit --- */
@@ -81,7 +80,7 @@ body {
     color: var(--light-text);
     background-size: cover; /* Skaalaa kuvan niin, että se peittää koko alueen */
     background-position: center center; /* Oletus: Keskitä kuva */
-    background-repeat: no-repeat; /* Varmistaa, ettei kuva toistu */
+    background-repeat: no-repeat; /* KORJAUS: Estää kuvan toistumisen */
     background-attachment: fixed; /* Jotta kuva pysyy paikallaan skrollatessa */
     position: relative;
     text-align: center;
@@ -128,6 +127,44 @@ body {
     background-position: center 35%; /* Esimerkki: Jos tärkeä sisältö on hieman keskikohdan alapuolella. Säädä tätä! */
 }
 /* --- Kuvat päättyy --- */
+
+
+/* --- LISÄYS: Täysleveä kuvalohko Yle-tyyliin --- */
+.full-width-media {
+    position: relative;
+    width: 100vw; /* Täysi näytön leveys */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw; /* Vie elementti ulos .container-leveydestä */
+    margin-right: -50vw;
+    height: 60vh; /* Reilu korkeus visuaalisuudelle */
+    min-height: 400px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat; /* KORJAUS: Estää kuvan toistumisen */
+    background-attachment: fixed; /* TÄRKEÄ: Kuva pysyy kiinteänä (parallax) */
+    color: var(--light-text);
+    display: flex;
+    align-items: flex-end; /* Kohdista teksti alas */
+}
+
+/* Teksti, joka rullautuu kuvan yli */
+.media-caption {
+    width: 100%;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4); /* Läpikuultava musta tausta luettavuutta varten */
+}
+
+.media-caption p {
+    /* Rajoita teksti takaisin keskitetyn sisällön leveydelle */
+    max-width: 960px;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    font-family: var(--header-font);
+    text-align: left;
+}
 
 
 /* --- Sivujen sisältöalue --- */
@@ -271,4 +308,3 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     font-size: 1rem;
     margin-bottom: 0;
 }
-
