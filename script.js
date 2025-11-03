@@ -3,8 +3,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const pages = document.querySelectorAll('.page-content');
     const toTopButton = document.getElementById('to-top-btn');
+    const hamburgerMenu = document.querySelector('.hamburger-menu'); // UUSI: Hampurilaisvalikko
+    const navLinksContainer = document.querySelector('.nav-links-container'); // UUSI: Navilinkkien sisältävä kontaineri
 
-    // --- SIVUN VAIHTOLOGIIKKA (KORJATTU) ---
+    // --- HAMBURGER-VALIKON TOIMINNALLISUUS ---
+    if (hamburgerMenu && navLinksContainer) {
+        hamburgerMenu.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+            hamburgerMenu.classList.toggle('active'); // Vaihda hampparivalikon ulkonäköä
+        });
+
+        // Sulje valikko, jos klikataan linkkiä mobiilinäkymässä
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) { // Vain mobiilissa
+                    navLinksContainer.classList.remove('active');
+                    hamburgerMenu.classList.remove('active');
+                }
+            });
+        });
+    }
+
+
+    // --- SIVUN VAIHTOLOGIIKKA ---
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault(); 
@@ -19,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentPage = document.querySelector('.page-content.active');
             const currentLink = document.querySelector('.nav-link.active');
             
-            const transitionDuration = 400; // Vastaa CSS:n transition kestoa .page-content.exiting
+            const transitionDuration = 400; 
 
             // 1. Piilota nykyinen sivu
             if (currentPage) {
