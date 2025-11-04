@@ -3,187 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedagoginen Portfolio</title>
+    <title>Joona Kokkosen Pedagoginen Portfolio</title>
+    <!-- Sivuston CSS-tyylit -->
     <link rel="stylesheet" href="style.css">
+    <!-- Google-fontit (Merriweather ja Lato) -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Navigaatiopalkki, joka pysyy sivun yläreunassa -->
     <nav class="navbar">
         <div class="container">
-            <span class="navbar-brand">Oma Portfolioni</span>
+            <span class="navbar-brand">Joona Kokkonen</span>
+            
+            <!-- Hamburger-valikko mobiililaitteille -->
             <button class="hamburger-menu" aria-label="Avaa navigointivalikko">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
             
+            <!-- Navigaatiolinkit, jotka ohjaavat eri osioihin -->
             <div class="nav-links-container">
                 <ul class="navbar-nav">
+                    <!-- data-page-attribuutti kertoo JS-koodille, mikä sivu näytetään -->
                     <li><a class="nav-link active" data-page="alku" href="#alku">Noniin</a></li>
                     <li><a class="nav-link" data-page="lahtoruutu" href="#lahtoruutu">Ollakko vai ollakko olematta</a></li>
                     <li><a class="nav-link" data-page="matkan-varrelta" href="#matkan-varrelta">Suattaahan se kuitennii olla</a></li>
-                    <li><a class="nav-link" data-page="synteesi" href="#synteesi">Jo alko lyyti kirjottammaan</a></li>
-                    <li><a class="nav-link" data-page="eteenpain" href="#eteenpain">Eipä tuota kerkee kaikkee valamiiks</a></li>
+                    <li><a class="nav-link" data-page="heureka" href="#heureka">Jo alkoi lyyti kirjottammaan</a></li>
+                    <li><a class="nav-link" data-page="horisontti" href="#horisontti">Eipä tuota kerkee kaikkee valamiiks</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div id="content-container">
+    <!-- Takaisin ylös -nappi (ilmestyy scrollatessa) -->
+    <button id="to-top-btn" aria-label="Siirry sivun alkuun">&uarr;</button>
 
-        <div id="alku" class="page-content active">
-            <header class="hero hero-page hero-alku">
+    <!-- 
+      Pääsisältöalue 
+      JS-koodi vaihtaa .active-luokan eri .page-content-osioiden välillä
+    -->
+    <div class="main-content-wrapper">
+
+        <!-- ===== 1. OSIO: "NONIIN" (HERO) ===== -->
+        <div id="alku" class="page-content active" style="display: block;">
+            
+            <!-- Hero-banneri tekstillä -->
+            <header class="hero-banner">
                 <div class="hero-content">
-                    </div>
+                    <h1 class="animate-on-scroll">Noniin</h1>
+                    <p class="animate-on-scroll">Matka käytännönläheisestä suorittajasta pedagogiseksi oivalluttajaksi</p>
+                </div>
             </header>
+            
+            <!-- Itse sisältöosio -->
             <main>
                 <section class="container content-section">
-                    <h2 class="animate-on-scroll">Noniin.</h2>
-                    <h3 class="animate-slide-left">Matka käytännönläheisestä suorittajasta pedagogiseksi oivalluttajaksi.</h3>
+                    <p style="font-style: italic; font-size: 1.2rem; text-align: center;" class="animate-on-scroll">
+                        Tämä portfolio on tarina siitä, miten vankka käytännön suorittaja löysi pedagogiikan, otti sen haltuun ja muuttui pedagogiseksi oivalluttajaksi.
+                    </p>
                     
-                    <p style="font-style: italic; font-size: 1.2rem;" class="animate-on-scroll">
-                        Tähän portfolioon on koottu matka käytännönläheisestä suorittajasta pedagogiseksi oivalluttajaksi. Lähdin opintoihin vankalla kokemuksella, mutta pitkälti käytännön syistä, opetuskokemusta takana vasta reilut kuusi kuukautta.
-                    </p>
-
-                    <section class="counter-section animate-on-scroll">
-                        <div class="container counter-container">
-                            <div class="counter-box">
-                                <div class="counter" data-target="4">0</div>
-                                <h3>Vuotta projekti-insinöörinä</h3>
-                            </div>
-                            <div class="counter-box">
-                                <div class="counter" data-target="5">0</div>
-                                <h3>vuotta johtajakokemusta</h3>
-                            </div>
-                            <div class="counter-box">
-                                <div class="counter" data-target="200">0</div>
-                                <h3>Pidettyä suunnittelukokousta pj:nä</h3>
-                            </div>
-                        </div>
-                    </section>
-                    <h3 class="animate-slide-left">Käytäntö edellä</h3>
-                    <p class="animate-slide-right">
-                        Syyt hakeutua opettajankoulutukseen olivat käytännönläheiset: vaatimus työsopimuksessa ja rakennusalan yleinen suhdanneherkkyys. Lähdin matkaan niin sanotusti "takki auki", ilman aiempaa kokemusta kasvatustieteistä.
-                    </p>
                     <p class="animate-on-scroll">
-                        Olinhan tottunut projektien vetämiseen, laajoihin kokonaisuuksiin rakennusalalla ja johtotehtäviin niin kunnallisella puolella kuin armeijassakin. Asioiden organisointi ja isojen suunnittelukokousten vetäminen olivat ydinosaamistani. Ajattelin, että teknisen alan tottumuksilla pärjää, vaikka ns. "humanistinen ote" hieman mietityttikin.
+                        Astuin tähän koulutukseen vankkana teknisen alan ammattilaisena, mutta pedagogiikan suhteen olin täysin aloittelija. On tärkeää olla rehellinen: en tullut tänne idealistisesta palosta, vaan koska se oli käytännön sanelema ja looginen seuraava askel urallani. Syyt olivat "hyvinkin käytännönläheiset", kuten "vaatimus työehtosopimuksessa". Opetuskokemusta minulla oli takana vasta reilut kuusi kuukautta, ja asenteeni opintoja kohtaan oli sen mukainen: odottava, mutta myös varautunut.
+                    </p>
+                    
+                    <!-- Koodisi "quote-box"-elementti otettu käyttöön -->
+                    <div class="quote-box animate-on-scroll">
+                        <blockquote>
+                            "Identiteettini oli rakennettu betoniin, teräkseen ja onnistuneiden projektien johtamiseen. Suhtauduin 'humanistiseen otteeseen' skeptisesti. Se vaikutti ennalta epämääräiseltä ja tehottomalta..."
+                        </blockquote>
+                    </div>
+
+                    <p class="animate-on-scroll">
+                        Tämä portfolio ei ole vain luettelo suoritetuista kursseista. Tämä on muutosloki siitä, miten tuo pragmaattinen ja vankkaan asiantuntijuuteen luottava suorittaja joutui tietoisesti haastamaan omat ennakkoluulonsa, kohtaamaan asiantuntijuutensa rajat opettajan roolissa ja rakentamaan itsensä määrätietoisesti uudelleen.
                     </p>
                 </section>
             </main>
         </div>
 
+        <!-- ===== 2. OSIO: "OLLAKKO VAI OLLAKKO OLEMATTA" (LÄHTÖTILANNE) ===== -->
         <div id="lahtoruutu" class="page-content">
-            <header class="hero hero-page hero-lahtoruutu">
-                <div class="hero-content">
-                    </div>
-            </header>
             <main>
                 <section class="container content-section">
-                    <p style="font-style: italic; font-size: 1.2rem;" class="animate-on-scroll">
-                        Tähän osioon on koottu kuvaukset ammatillisesta taustastani sekä ne tavoitteet, jotka asetuin opintojen alussa. Ne toimivat peilinä sille, miten oma pedagoginen ymmärrykseni ja toimintatapani ovat kehittyneet opintojen edetessä.
-                    </p>
-                    
                     <h2 class="animate-on-scroll">Ollakko vai ollakko olematta</h2>
                     <h3 class="animate-slide-left">Minä matkalla kohti syvempää ymmärrystä ja uusia näkökulmia.</h3>
-                    
-                    <h3 class="animate-slide-left">Omat alkuperäiset tavoitteeni pedagogisille opinnoille</h3>
-                    
-                    <div class="card-container">
-                        <div class="info-card animate-on-scroll">
-                            <h4>Oma kehittyminen</h4>
-                            <p>Odotan työltä oman opettajuuden kehittymistä ja kehittävää vuorovaikutusta opiskelijoiden kanssa.</p>
-                        </div>
-                        <div class="info-card animate-on-scroll">
-                            <h4>Vaatimustaso</h4>
-                            <p>Yksi kehittymishaaste on vaatimustason asettaminen riittävän korkealle ja siitä kiinni pitäminen.</p>
-                        </div>
-                    </div>
-
-                    <div class="full-width-media animate-on-scroll" 
-                         style="background-image: url('images/suottaapiolla.png');">
-                        <div class="media-caption">
-                            <p class="animate-on-scroll">
-                                "Suurin muutos tapahtui, kun ymmärsin humanistisen otteen merkityksen – opettajan työ on pehmeiden arvojen kohtaamista."
-                            </p>
-                        </div>
-                    </div>
-                    <div class="image-container animate-on-scroll" style="margin-top: 2rem;">
-                        <img src="images/profiili.png" alt="Oma profiilikuva, pedagogisen portfolion tekijä.">
-                        <p class="image-caption">Oma kuvani portfolioon.</p>
-                    </div>
-
-                    <h3 class="animate-slide-right">Reflektio lähtötilanteesta nyt</h3>
+                
+                    <h3 class="animate-slide-left">Asiantuntijasta opettajaksi</h3>
                     <p class="animate-slide-right">
-                        <em>[Palatessani näihin tavoitteisiin, huomaan niiden olleen... (esim. osuvia, liian yleisiä, ennakoivia). Erityisesti tavoite [mainitse yksi tavoite] ohjasi matkaani merkittävästi, ja sen saavuttaminen on tuonut esiin uusia kehittymiskohteita.]</em>
+                        En lähtenyt tälle matkalle tyhjin käsin, päinvastoin. Ammatillinen identiteettini ja itseluottamukseni perustuivat kiistattomaan ja laaja-alaiseen kokemukseen. Olin toiminut lukuisissa vaativissa rooleissa: työnjohtajana, vastaavana työnjohtajana, projekti-insinöörinä ja jopa teknisen viraston johdossa. Olin johtanut, organisoinut, neuvotellut ja saanut tuloksia aikaan. Vahvuuteni, "projektien vetäminen ja laaja-alainen kokemus", olivat selviöitä.
                     </p>
+                    <p class="animate-slide-right">
+                        Tämä sama itseluottamus oli kuitenkin samalla suurin sokea pisteeni ja esteeni. Oletin tiedostamattani, että opettaminen on vain logistinen jatkumo asiantuntijuudelle: kun tietää tarpeeksi paljon, voi kertoa sen muille. Opettaja oli minulle synonyymi asiantuntijalle, joka jakaa tietoa.
+                    </p>
+
+                    <h3 class="animate-slide-left">Omat alkuperäiset tavoitteeni pedagogisille opinnoille</h3>
+                    <p class="animate-slide-right">
+                        Alkutilanteen tavoitteeni kumpusivat suoraan tästä asiantuntijakeskeisestä maailmankuvasta. Haasteeni, joita kirjasin ylös, eivät liittyneet niinkään siihen, *mitä* minun tulisi opettaa, vaan siihen, *miten* saan tiedon siirrettyä tehokkaasti. Olin huolissani "vaatimustason asettamisesta riittävän korkealle", koska pelkäsin, että tässä uudessa, "pehmeämmässä" ympäristössä rima laskisi. Halusin oppia "opiskelijoiden oppimismenetelmien tunnistamista", jonka näin lähinnä teknisenä taitona, uutena työkaluna vanhaan pakkiin. Etsin opettamiseen manuaalia ja selkeitä ohjeita, kun minun olisi pitnyt etsiä kokonaan uutta ajattelumallia ja filosofiaa.
+                    </p>
+
+                    <!-- Hyödynnetään olemassa olevaa "Opettajan osaamisalueet.jpg" -kuvaasi -->
+                    <div class="image-container animate-on-scroll">
+                        <img src="Opettajan%20osaamisalueet.jpg" alt="Kaavio opettajan osaamisalueista, joka toimi opintojen viitekehyksenä.">
+                        <p class="caption">Opintojen alussa asetetut tavoitteet ja osaamisalueet toimivat peilinä sille, miten oma pedagoginen ymmärrykseni on kehittynyt.</p>
+                    </div>
+
+                </section>
+                
+                <!-- ===== JUJU 1: Animoituva Laskuri ===== -->
+                <!-- Tämä "juju" on otettu suoraan koodistasi ja täytetty sisällöllä -->
+                <section class="counter-section">
+                    <h2 class="animate-on-scroll" style="text-align: center; color: var(--dark-text); padding-bottom: 2rem;">Matka numeroina</h2>
+                    <div class="container counter-container">
+                        <div class="counter-box animate-on-scroll">
+                            <div class="counter" data-target="15">0</div>
+                            <h3>+ vuotta</h3>
+                            <p>Työelämän asiantuntijakokemusta</p>
+                        </div>
+                        <div class="counter-box animate-on-scroll">
+                            <div class="counter" data-target="2.5">0</div>
+                            <h3>vuotta</h3>
+                            <p>Pedagogista opiskelua</p>
+                        </div>
+                        <div class="counter-box animate-on-scroll">
+                            <div class="counter" data-target="5">0</div>
+                            <h3>Omaa periaatetta</h3>
+                            <p>Kirkastunut opetusfilosofia</p>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
 
+
+        <!-- ===== 3. OSIO: "SUATTAAHAN SE KUITENNII OLLA" (OIVALLUKSET) ===== -->
         <div id="matkan-varrelta" class="page-content">
-            <header class="hero hero-page hero-matkan-varrelta">
-                <div class="hero-content">
-                    </div>
-            </header>
             <main>
                 <section class="container content-section">
-                    <p style="font-style: italic; font-size: 1.2rem;" class="animate-on-scroll">
-                        Tähän osioon on koottu keskeisimmät oivallukseni ja oppini pedagogisten opintojen ajalta. Olen jäsentänyt ne teemoittain, hyödyntäen opintojaksojen itsearviointeja ja päiväkirjamerkintöjä.
+                    <h2 class="animate-on-scroll">Suattaahan se kuitennii olla</h2>
+                    <h3 class="animate-slide-left">Miten epävarmuus ja oman pohdinnan kautta tunnistetut puutteet muuttuivat mahdollisuuksiksi.</h3>
+                    <p class="animate-on-scroll">
+                        Tässä osiossa tapahtui käänne. Tämä ei ollut yksittäinen dramaattinen hetki, vaan sarja oivalluksia, joissa epävarmuudesta tuli suurin opettajani ja asiantuntijan kuori alkoi murtua.
                     </p>
-                    <h2 class="animate-on-scroll">Suattaapi olla</h2>
-                    <h3 class="animate-slide-left">Miten epävarmuus ja joustavuus muuttuvat mahdollisuuksiksi.</h3>
-                    
-                    <h3 class="animate-slide-left"><em>[Alaotsikko: esim. Oppimiskäsitykseni muutos]</em></h3>
-                    <p class="animate-slide-right"><em>[Tähän kuvaus teemasta, oivalluksistasi ja esimerkkejä.]</em></p>
-                    
-                    <h3 class="animate-slide-left"><em>[Alaotsikko: esim. Arviointi ja palaute]</em></h3>
-                    <p class="animate-slide-right"><em>[Tähän kuvaus teemasta, oivalluksistasi ja esimerkkejä.]</em></p>
+
+                    <!-- ===== JUJU 2: Kääntyvät Kortit ===== -->
+                    <!-- Koodisi "card-container" on täydellinen näiden oivallusten esittelyyn -->
+                    <div class="card-container">
+                        
+                        <!-- KORTTI 1: Miniluento -->
+                        <div class="card animate-on-scroll">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-title">Asiantuntijuus ei riitä</h4>
+                                    <p class="card-subtitle">Oivallus 1: Miniluennon reflektio</p>
+                                    <p>Suoriuduin "Miniluennosta" omasta mielestäni asiantuntijana hyvin. Esiintymiseni oli rauhallista ja esimerkit vankkoja. Mutta analysoidessani tilannetta pedagogisesti, huomasin itse välittömästi sen heikkoudet...</p>
+                                </div>
+                                <div class="card-back">
+                                    <h4 class="card-title">Oma analyysini</h4>
+                                    <div class="quote-box small">
+                                        <blockquote>"Opiskelijoiden osallistaminen jäi vähäiseksi ja Teoreettinen viitekehys jäi vähäiseksi."</blockquote>
+                                        <p class="quote-cite">- Oma opintopäiväkirjamerkintä</p>
+                                    </div>
+                                    <p>Tämä oman pohdinnan tulos pakotti minut etsimään uusia työkaluja.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KORTTI 2: Teoria -->
+                        <div class="card animate-on-scroll">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-title">Teoria on työkalu</h4>
+                                    <p class="card-subtitle">Oivallus 2: "Huoneentaulun" rakentaminen</p>
+                                    <p>Se "humanistinen ote", jota vierastin, osoittautuikin ratkaisuksi. Pureuduin oppimisteorioihin ja löysin kodin konstruktivismista. Oman "Huoneentaulun" luominen oli uuden identiteettini peruskirja.</p>
+                                </div>
+                                <div class="card-back">
+                                    <h4 class="card-title">Uusi määritelmäni</h4>
+                                     <div class="quote-box small">
+                                        <blockquote>"Oppiminen on... itseohjautuvaa, reflektoivaa ja sosiaalista vuorovaikutusta."</blockquote>
+                                        <p class="quote-cite">- Oma "Huoneentaulu"</p>
+                                    </div>
+                                    <p>Pedagogiikka ei ollutkaan höttöä, vaan työni kantava rakenne.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KORTTI 3: Osallisuus -->
+                        <div class="card animate-on-scroll">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-title">Tarkkailija on vahvuus</h4>
+                                    <p class="card-subtitle">Oivallus 3: Yhdenvertaisuus käytännössä</p>
+                                    <p>Oivallus "äänekkäiden" ja "hiljaisten" opiskelijoiden dynamiikasta mullisti käsitykseni luokkahuoneesta. Ymmärsin, että oma luontainen roolini "tarkkailijana" ei ollutkaan heikkous...</p>
+                                </div>
+                                <div class="card-back">
+                                    <h4 class="card-title">Pedagoginen supervoima</h4>
+                                    <p>Oman "tarkkailijan" luonteeni [cite: 7 Itsearviointi] avulla pystyn tietoisesti luomaan psykologisesti turvallisen tilan ja hallinnoimaan keskustelua niin, että kaikkien ääni pääsee kuuluviin. Siitä tuli pedagoginen vahvuuteni.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- .card-container loppuu -->
                 </section>
             </main>
         </div>
 
-        <div id="synteesi" class="page-content">
-            <header class="hero hero-page hero-synteesi">
-                <div class="hero-content">
-                    </div>
-            </header>
+
+        <!-- ===== 4. OSIO: "JO ALKOI LYYTI KIRJOTTAMMAAN" (SYNTEESI) ===== -->
+        <div id="heureka" class="page-content">
             <main>
                 <section class="container content-section">
-                    <p style="font-style: italic; font-size: 1.2rem;" class="animate-on-scroll">
-                        Tämä osio kiteyttää sen, millaiseksi opettajaksi ja pedagogiseksi toimijaksi olen muodostunut opintojen ja samanaikaisen lehtorintyön myötä.
+                    <h2 class="animate-on-scroll">Jo alkoi lyyti kirjottammaan</h2>
+                    <h3 class="animate-slide-left">Keski-Savon Heureka: Minun pedagoginen mallini.</h3>
+                    <p class="animate-on-scroll">
+                        Tässä osiossa näytän, miten palaset loksahtivat paikoilleen. Tämä on synteesi, jossa epävarmuus väistyi ja tilalle tuli vankka, perusteltu pedagoginen näkemys. Tämä on se hetki, kun rautainen asiantuntijuuteni ja uusi pedagoginen ymmärrykseni fuusioituivat.
                     </p>
-                    <h2 class="animate-on-scroll">Keski-Savon Heureka</h2>
-                    <h3 class="animate-slide-left">Käytännön kokemuksia ja arjen viisauksia matkan varrelta.</h3>
 
-                    <h3 class="animate-on-scroll">Pedagogiset periaatteeni ja toimintatapani</h3>
-                    
-                    <div class="card-container">
-                        <div class="info-card animate-slide-left">
-                            <h4>Periaate 1: Oivalluttaminen</h4>
-                            <p>Johtajakokemukseni ja tapani vetää kokouksia ovat tukeneet taitoja luoda yhteishenkeä ja auttaa ihmisiä oivaltamaan.</p>
+                    <!-- ===== JUJU 3: Aikajana ===== -->
+                    <!-- Koodisi "timeline-container" näyttää kehityksen ja lopputuloksen hienosti -->
+                    <div class="timeline-container">
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">1</div>
+                            <div class="timeline-content animate-slide-right">
+                                <h4>Pedagogiset Periaatteeni</h4>
+                                <p>En enää arvaile, vaan tiedän, miksi toimin niin kuin toimin. Opetukseni perustuu viiteen kovaan periaatteeseen, jotka olen itse määritellyt ja testannut:</p>
+                                <ul>
+                                    <li><strong>Ongelmakeskeisyys & Kokemuksellisuus:</strong> Alallani opitaan ratkomalla aitoja työelämän ongelmia.</li>
+                                    <li><strong>Vuorovaikutuksellisuus:</strong> Työmaa on yhteistyötä, siksi opetuksen on oltava sosiaalista.</li>
+                                    <li><strong>Reflektiivisyys:</strong> Tämä erottaa suorittajan asiantuntijasta.</li>
+                                    <li><strong>Formatiivisuus:</strong> Arvioin tukeakseni oppimista, en vain tuomitakseni lopputulosta.</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="info-card animate-on-scroll">
-                            <h4>Periaate 2: Läpinäkyvyys</h4>
-                            <p>Asioiden on oltava läpinäkyviä, niillä on oltava selkeät tavoitteet ja niistä on pystyttävä päättämään.</p>
+
+                        <div class="timeline-item">
+                            <div class="timeline-icon">2</div>
+                            <div class="timeline-content animate-slide-right">
+                                <h4>Periaatteista Käytäntöön</h4>
+                                <p>Opetusharjoitteluni suunnitelma on tämän mallin ilmentymä. Ankkuroin opetukseni suoraan alan <strong>megatrendeihin (BIM, kestävä kehitys)</strong>, koska meidän on koulutettava tulevaisuuden tekijöitä. Käytän <strong>aitoja työelämän työkaluja (RatuNet, e-perehdytys)</strong>, koska oppilaitoksen on oltava saumaton osa työelämää.</p>
+                                <!-- Tässä on paikka kaaviollesi (esim. 9 opetusharjoittelun suunnitelma.pdf, s. 8) -->
+                                <!-- <img src="path/to/oma_kaavio.jpg" alt="Oma pedagoginen mallini" style="width:100%; max-width: 400px; margin-top: 1rem; border-radius: 8px;"> -->
+                            </div>
                         </div>
-                        <div class="info-card animate-slide-right">
-                            <h4>Periaate 3: Suoraselkäisyys</h4>
-                            <p>Johtajakokemus opetti suoraselkäisyyttä: asioita ei kannata turhaan selitellä, varsinkaan jos ohjeistus tulee ylempää.</p>
+
+                         <div class="timeline-item">
+                            <div class="timeline-icon">3</div>
+                            <div class="timeline-content animate-slide-right">
+                                <h4>Näin se näkyy käytännössä</h4>
+                                <p>Tuntisuunnitelmani eivät ole enää monologeja. Ne ovat prosesseja, jotka alkavat <strong>animaatiolla</strong> (motivaatio), etenevät teoriaan (sisäistäminen) ja huipentuvat <strong>yhteistoiminnalliseen soveltavaan tehtävään</strong> (ulkoistaminen). Alkuperäinen haasteeni "vaatimustasosta" on ratkaistu systemaattisella, monipuolisella ja formatiivisella arviointikokonaisuudella.</p>
+                            </div>
                         </div>
-                    </div>
-                    </section>
+
+                    </div> <!-- .timeline-container loppuu -->
+
+                </section>
             </main>
         </div>
 
-        <div id="eteenpain" class="page-content">
-            <header class="hero hero-page hero-eteenpain">
-                <div class="hero-content">
-                    </div>
-            </header>
+
+        <!-- ===== 5. OSIO: "EIPÄ TUOTA KERKEE KAIKKEE VALAMIIKS" (TULEVAISUUS) ===== -->
+        <div id="horisontti" class="page-content">
             <main>
                 <section class="container content-section">
-                    <p style="font-style: italic; font-size: 1.2rem;" class="animate-on-scroll">
+                    <p style="font-style: italic; font-size: 1.2rem; text-align: center;" class="animate-on-scroll">
                         Oppiminen on elinikäinen prosessi. Tämä osio peilaa sitä, mitä olen oppinut itsestäni oppijana ja ammatillisena kehittyjänä.
                     </p>
                     <h2 class="animate-on-scroll">Aena tuota riittää tyämaata.</h2>
@@ -191,24 +274,41 @@
                     
                     <h3 class="animate-slide-left">Oppijana kehittyminen</h3>
                     <p class="animate-slide-right">
-                        Olen tyypiltäni "viimeisen deadlinen kaveri". Sosiaalinen paine ja se, että töiden valmistumisesta riippuu muidenkin tekeminen, auttavat minua eteenpäin.
+                        Tämä matka on opettanut minulle itsestäni oppijana yhtä paljon kuin opettamisesta. Myönnän sen täysin: olen edelleen "viimeisen deadlinen kaveri". Mutta en näe sitä enää heikkoutena, vaan ominaisuutena, jota tulee johtaa. Tiedän, että tarvitsen toimiakseni tehokkaasti ulkoista rakennetta ja "sosiaalista painetta". Tämä itsetuntemus on valtava vahvuus. Osaan paitsi jäsentää oman työni, myös tarjota opiskelijoilleni juuri sitä selkeyttä, ennakoitavuutta ja jämäkkää ohjausta, jota he tarvitsevat menestyäkseen.
                     </p>
-                    <h3 class="animate-slide-left">Seuraavat kehittymiskohteeni</h3>
-                    <p class="animate-slide-right"><em>[Tähän listailet 2-3 konkreettista kehittymiskohdetta tai teemaa, joihin haluat syventyä tulevaisuudessa lehtorina.]</em></p>
+
+                    <h3 class="animate-slide-left">Seuraavat kehittymiskohteeni (eli seuraava työmaa)</h3>
+                    <p class="animate-slide-right">
+                        Olen siirtynyt opettajan roolista opetuksen kehittäjäksi. AHOTOINTI-raporttini osoitti, että otin <strong>päävastuun</strong> valintakoekurssin modernisoinnista ja kykenen johtamaan pedagogista kehitystyötä. Tämä työ ei lopu tähän. Seuraava työmaa on jo tiedossa:
+                    </p>
+                    
+                    <!-- Käytän listaa selkeyttämään kehityskohteet -->
+                    <ol class_="animate-slide-right" style="list-style-position: inside; padding-left: 1rem; margin-top: 1rem;">
+                        <li style="margin-bottom: 1rem;">
+                            <strong>Tekoälyn hallinta:</strong> Olen jo aloittanut tämän työn. Minun tehtäväni on pysyä kehityksen kärjessä ja varmistaa, että tekoäly on opiskelijoillemme työkalu, ei oikotie. Tämä vaatii jatkuvaa arvioinnin ja tehtävänantojen uudistamista.
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong>Saavutettavuuden syventäminen:</strong> Olen raapaissut pintaa kognitiivisen saavutettavuuden osalta. Tämä on seuraava suuri aluevaltaukseni. Rakennusala tarvitsee kaikki osaavat tekijät, ja minun tehtäväni on purkaa oppimisen esteitä.
+                        </li>
+                        <li>
+                            <strong>Luovuuden vapauttaminen:</strong> Tunnistan rehellisesti, että visuaaliset menetelmät, kuten Mind Mapit, ovat minulle epämukavuusaluetta. Juuri siksi aion ottaa ne seuraavaksi haltuun. Monipuolinen opettaja hallitsee monipuoliset työkalut. Työmaa ei lopu koskaan.
+                        </li>
+                    </ol>
+
                 </section>
             </main>
         </div>
 
-    </div> 
+    </div> <!-- .main-content-wrapper loppuu -->
+    
+    <!-- Sivun alatunniste -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Joona Kokkonen | Pedagoginen Portfolio</p>
+            <p>&copy; 2025 Joona Kokkonen - Pedagoginen Portfolio</p>
         </div>
     </footer>
-
-    <button id="to-top-btn" title="Takaisin ylös">↑</button>
-
+    
+    <!-- Sivuston toiminnallisuus (sivunvaihdot, animaatiot) -->
     <script src="script.js"></script>
-
 </body>
 </html>
