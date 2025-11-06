@@ -14,8 +14,8 @@ body {
     font-family: var(--body-font);
     line-height: 1.7;
     color: var(--dark-text);
-    background-color: var(--white);
-    overflow-x: hidden; 
+    background-color: var(--light-text); /* Korjattu var(--white) -> var(--light-text) */
+    overflow-x: hidden;
 }
 .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 
@@ -28,11 +28,11 @@ body {
     top: 0;
     z-index: 100;
 }
-.navbar .container { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    flex-wrap: wrap; 
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .navbar-brand {
     font-family: var(--header-font);
@@ -40,18 +40,18 @@ body {
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 
 /* --- HAMBURGER-VALIKKO (ALASVETOVALIKKO) --- */
 .hamburger-menu {
-    display: none; 
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
     position: relative;
-    z-index: 101; 
+    z-index: 101;
 }
 .hamburger-menu .bar {
     display: block;
@@ -67,25 +67,25 @@ body {
 .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 .nav-links-container {
-    width: 100%; 
+    width: 100%;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
 }
-.navbar-nav { 
-    display: flex; 
-    list-style: none; 
-    width: auto; 
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    width: auto;
 }
-.navbar-nav li { margin-left: 20px; }
+.navbar-nav li { margin-left: 15px; } /* Pienennetty marginaalia valikon otsikoiden välissä */
 .navbar-nav a {
     text-decoration: none;
     color: var(--dark-text);
     font-weight: 700;
-    padding-bottom: 5px;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    position: relative; 
-    border-bottom: 3px solid transparent; 
+    /* padding-bottom ja border-bottom poistettu täältä, koska ::after hoitaa alleviivauksen */
+    transition: color 0.3s ease; /* transition päivitetty */
+    position: relative;
     cursor: pointer;
+    padding: 5px 0; /* Lisätty pystysuuntainen padding tekstiä varten */
 }
 
 /* --- UUSI SISÄLLÖN VAIHTOLOGIIKKA --- */
@@ -111,80 +111,80 @@ body {
     width: 100%;
     opacity: 0;
     transform: translateY(-15px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 /* --- Hero-bannerit --- */
 .hero {
     color: var(--light-text);
-    background-size: cover; 
-    background-position: center center; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     position: relative;
     text-align: center;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
-    overflow: hidden; 
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-.hero-page { 
-    height: 50vh; 
-    min-height: 250px; 
+.hero-page {
+    height: 50vh;
+    min-height: 250px;
 }
 .hero-page h1 { font-size: 2.5rem; }
 
 
 /* --- Taustakuvat --- */
-.hero-alku { 
-    background-image: url('images/profiili.png'); 
-    background-position: center 35%; 
+.hero-alku {
+    background-image: url('images/profiili.png');
+    background-position: center 35%;
 }
-.hero-lahtoruutu { 
+.hero-lahtoruutu {
     background-image: url('images/ollakkovaiollakko.png');
-    background-position: center 40%; 
+    background-position: center 40%;
 }
-.hero-matkan-varrelta { 
+.hero-matkan-varrelta {
     background-image: url('images/suottaapiolla.png');
-    background-position: center 40%; 
+    background-position: center 40%;
 }
-.hero-synteesi { 
+.hero-synteesi {
     background-image: url('images/Niimpatietennii.png');
-    background-position: center 30%; 
+    background-position: center 30%;
 }
-.hero-eteenpain { 
+.hero-eteenpain {
     background-image: url('images/Onsetyomaa.png');
-    background-position: center 35%; 
+    background-position: center 35%;
 }
 
 
 /* --- LISÄYS: Täysleveä kuvalohko Yle-tyyliin --- */
 .full-width-media {
     position: relative;
-    width: 100vw; 
+    width: 100vw;
     left: 50%;
     right: 50%;
-    margin-left: -50vw; 
+    margin-left: -50vw;
     margin-right: -50vw;
-    height: 60vh; 
+    height: 60vh;
     min-height: 400px;
     margin-top: 3rem;
     margin-bottom: 3rem;
     background-size: cover;
     background-position: center center;
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--light-text);
     display: flex;
-    align-items: flex-end; 
+    align-items: flex-end;
 }
 
 /* Teksti, joka rullautuu kuvan yli */
 .media-caption {
     width: 100%;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.4); 
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .media-caption p {
@@ -209,66 +209,66 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 
 /* --- Responsiivisuus --- */
 @media (max-width: 768px) {
-    .navbar .container { 
-        flex-wrap: wrap; 
-        justify-content: space-between; 
+    .navbar .container {
+        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
     }
     .navbar-brand {
-        flex-grow: 0; 
+        flex-grow: 0;
     }
 
     .hamburger-menu {
-        display: block; 
+        display: block;
     }
 
     .nav-links-container {
-        max-height: 0; 
-        overflow: hidden; 
-        transition: max-height 0.3s ease-out; 
-        flex-basis: 100%; 
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        flex-basis: 100%;
         margin-top: 1rem;
     }
 
     .nav-links-container.active {
-        max-height: 300px; 
+        max-height: 300px;
     }
 
-    .navbar-nav { 
-        flex-direction: column; 
-        width: 100%; 
-        background-color: var(--secondary-color); 
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--secondary-color);
         padding: 1rem 0;
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .navbar-nav li { 
-        margin-left: 0; 
-        width: 100%; 
-        text-align: center; 
+    .navbar-nav li {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
         padding: 0.5rem 0;
     }
-    .navbar-nav a { 
-        display: block; 
-        padding: 0.5rem 0; 
-        border-bottom: none; 
-        color: var(--dark-text); 
+    .navbar-nav a {
+        display: block;
+        padding: 0.5rem 0;
+        border-bottom: none;
+        color: var(--dark-text);
     }
-        .navbar-nav a.active { 
-            background-color: var(--primary-color); 
-            color: var(--light-text) !important; /* Varmistaa valkoisen värin mobiilissa */
-            border-radius: 5px;
-            margin: 0 10px; 
-            border-bottom: none; 
-        }
-    .navbar-nav a.active:hover::after { width: 0; } 
+    .navbar-nav a.active {
+        background-color: var(--primary-color);
+        color: var(--light-text) !important; /* Varmistaa valkoisen värin mobiilissa */
+        border-radius: 5px;
+        margin: 0 10px;
+        border-bottom: none;
+    }
+    /* .navbar-nav a.active:hover::after poistettu, koska ei enää tarvita */
 
 
-    .hero-page { 
-        height: 40vh; 
-        min-height: 200px; 
+    .hero-page {
+        height: 40vh;
+        min-height: 200px;
     }
-    .hero h1 { font-size: 2rem; } 
+    .hero h1 { font-size: 2rem; }
 }
 
 /* --- Kuvan tyylittely --- */
@@ -277,10 +277,29 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 .image-caption { font-style: italic; font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
 
 /* --- Animoitu alleviivaus navigaatiossa --- */
-.navbar-nav a::after { content: ''; position: absolute; width: 0; height: 3px; background-color: var(--accent-color); bottom: 0; left: 50%; transform: translateX(-50%); transition: width 0.3s ease-in-out; }
+.navbar-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--accent-color);
+    bottom: 2px; /* Säädetty alleviivauksen paikkaa */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
 .navbar-nav a:hover::after { width: 100%; }
-.navbar-nav a.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
-.navbar-nav a.active:hover::after { width: 0; }
+
+/* Aktiivisen linkin alleviivaus käytettäen samaa ::after-elementtiä */
+.navbar-nav a.active {
+    color: var(--primary-color);
+    /* border-bottom-color poistettu */
+}
+.navbar-nav a.active::after {
+    width: 100%;
+    background-color: var(--primary-color); /* Aktiivisen linkin viiva päävärillä */
+}
+
 
 /* --- "Takaisin ylös" -napin tyylit --- */
 #to-top-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; line-height: 50px; text-align: center; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; z-index: 1000; }
@@ -292,10 +311,10 @@ main { background-color: var(--light-text); padding: 3rem 0; }
 */
 
 /* --- "Fade-in on Scroll" -tyylit --- */
-.animate-on-scroll { 
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 /* --- Juju 3: Monipuolisemmat skrollausanimaatiot --- */
@@ -387,4 +406,34 @@ main { background-color: var(--light-text); padding: 3rem 0; }
     margin-bottom: 0;
 }
 
-
+/* TÄSTÄ ALKAVAT NE UUDET, Aiemmin HTML:ssä olleet TYYLIT */
+.image-container-custom { /* Uusi luokka, jotta ei mene päällekkäin olemassa olevien kanssa */
+    margin: 20px auto; /* Keskittää kuvan */
+    text-align: center;
+    max-width: 800px; /* Säädä tarpeen mukaan */
+}
+.image-container-custom img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.caption-custom { /* Uusi luokka kuvatekstille */
+    font-style: italic;
+    margin-top: 10px;
+    color: #555;
+    font-size: 0.9em;
+}
+.quote-box-custom { /* Uusi luokka sitaatille */
+    background-color: #f9f9f9;
+    border-left: 5px solid #ccc;
+    margin: 20px auto; /* Keskittää */
+    padding: 15px;
+    font-style: italic;
+    color: #555;
+    max-width: 800px; /* Säädä tarpeen mukaan */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.quote-box-custom p {
+    margin: 0;
+}
