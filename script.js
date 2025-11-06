@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCounter(counterElement) {
         const target = +counterElement.dataset.target;
         const duration = 4500;
-        const stepTime = 50;
+        const stepTime = 20;
         const steps = duration / stepTime;
         const increment = target / steps;
         let current = 0;
