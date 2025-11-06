@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const navLinks = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page-content'); // Tämä ei välttämättä tarvita tässä, mutta ok jättää
+    const pages = document.querySelectorAll('.page-content');
     const toTopButton = document.getElementById('to-top-btn');
-    const hamburgerMenu = document.querySelector('.hamburger-menu'); 
-    const navLinksContainer = document.querySelector('.nav-links-container'); 
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLinksContainer = document.querySelector('.nav-links-container');
 
     // --- HAMBURGER-VALIKON TOIMINNALLISUUS ---
     if (hamburgerMenu && navLinksContainer) {
         hamburgerMenu.addEventListener('click', () => {
             navLinksContainer.classList.toggle('active');
-            hamburgerMenu.classList.toggle('active'); 
+            hamburgerMenu.classList.toggle('active');
         });
 
         // Sulje valikko, jos klikataan linkkiä mobiilinäkymässä
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) { 
+                if (window.innerWidth <= 768) {
                     navLinksContainer.classList.remove('active');
                     hamburgerMenu.classList.remove('active');
                 }
@@ -27,15 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SIVUN VAIHTOLOGIIKKA (KORJATTU JA SELVENNETTY) ---
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); 
+            event.preventDefault();
 
-            const targetPageId = link.dataset.page; 
+            const targetPageId = link.dataset.page;
             const targetPage = document.getElementById(targetPageId);
 
             // Jos kohdesivua ei löydy tai se on jo aktiivinen, ei tehdä mitään.
             if (!targetPage || targetPage.classList.contains('active')) {
-                return; 
+                return;
             }
+
+            // Pysäytä kaikki videot ennen sivun vaihtoa
+            stopAllVideos();
 
             const currentPage = document.querySelector('.page-content.active');
             const currentLink = document.querySelector('.nav-link.active');
@@ -58,12 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     showAndActivateNewPage(); // Kutsu uuden sivun näyttämistä
                 };
 
-                // Jos sivulla on CSS-animaatioita, odota niiden päättymistä
-                // Jos ei, tai jos selain ei tue transitionend-tapahtumaa luotettavasti, käytä setTimeoutia.
-                // Tämä on robustimpi ratkaisu.
+                // Robustimpi ratkaisu: käytä setTimeoutia varmistamaan animaation päättyminen.
                 setTimeout(() => {
                     if (currentPage.classList.contains('exiting')) { // Tarkista onko luokka vielä päällä
-                         handleTransitionEnd();
+                        handleTransitionEnd();
                     }
                 }, transitionDuration + 50); // Pieni lisäviive varmuuden vuoksi
 
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function showAndActivateNewPage() {
                 // Piilota KAIKKI sivut ensin varmuuden vuoksi
-                pages.forEach(p => p.style.display = 'none'); // Lisätty tämä rivi
+                pages.forEach(p => p.style.display = 'none');
 
                 targetPage.style.display = 'block'; // Tee uusi sivu näkyväksi ensin
                 
@@ -84,13 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     window.scrollTo({ top: 0, behavior: 'auto' }); // Skrollaa sivun ylälaitaan
                     resetAndInitializeScrollObserver(targetPage); // Alusta animaatiot uudelle sivulle
-                }, 10); 
+                }, 10);
             }
         });
     });
 
+    // --- VIDEODEN HALLINTA ---
+    function stopAllVideos() {
+        document.querySelectorAll('video').forEach(video => {
+            if (!video.paused) {
+                video.pause();
+                video.currentTime = 0; // Kelaa alkuun
+            }
+        });
+    }
+
     // --- SKROLLAUSANIMAATIOIDEN ALUSTUS & RESETOINTI ---
-    let currentObserver = null; 
+    let currentObserver = null;
 
     function resetAndInitializeScrollObserver(container) {
         if (currentObserver) {
@@ -100,11 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Poista 'visible' luokka kaikista animoitavista elementeistä ennen uuden sivun käsittelyä
         const allAnimatableElements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right');
         allAnimatableElements.forEach(el => {
-            el.classList.remove('visible'); 
+            el.classList.remove('visible');
             if (el.classList.contains('counter-section')) {
                 el.querySelectorAll('.counter').forEach(counterEl => {
                     counterEl.classList.remove('animated');
-                    counterEl.innerText = '0'; 
+                    counterEl.innerText = '0';
                 });
             }
         });
@@ -115,9 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         const observerOptions = {
-            root: null, 
+            root: null,
             rootMargin: '0px',
-            threshold: 0.7 // Muutettu 0.1 -> 0.7. Animaatio alkaa, kun vähintään 70% elementistä näkyy.
+            threshold: 0.7 // Animaatio alkaa, kun vähintään 70% elementistä näkyy.
         };
 
         currentObserver = new IntersectionObserver((entries, observer) => {
@@ -125,7 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     // Vain jos elementti ei ole jo animoitu (estää toistuvat animaatiot)
                     if (!entry.target.classList.contains('visible')) {
-                        const delay = window.innerWidth > 768 ? 200 : 0; // 200ms viive työpöydällä, ei viivettä mobiilissa
+                        // Hae viive data-delay-attribuutista, oletus 0ms
+                        const delay = parseInt(entry.target.dataset.delay) || 0;
+                        // Lisää ehdollinen viive työpöydälle (jos data-delay on 0 tai määrittelemätön)
+                        const baseDelay = window.innerWidth > 768 && delay === 0 ? 200 : 0;
+                        
                         setTimeout(() => {
                             entry.target.classList.add('visible');
                             // ... (muu logiikka, joka oli if (entry.isIntersecting) -lohkon sisällä)
@@ -133,14 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const counters = entry.target.querySelectorAll('.counter');
                                 counters.forEach(counter => {
                                     if (!counter.classList.contains('animated')) {
-                                        counter.classList.add('animated'); 
+                                        counter.classList.add('animated');
                                         animateCounter(counter);
-                                  }
-                             });
-                        }
-              }, delay);
-    }
-}
+                                    }
+                                });
+                            }
+                        }, baseDelay + delay); // Yhdistetty perusviive ja elementin oma viive
+                    }
+                }
             });
         }, observerOptions);
 
@@ -149,9 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LASKURIEN ANIMOINTIFUNKTIO ---
     function animateCounter(counterElement) {
-        const target = +counterElement.dataset.target; 
-        const duration = 4500; 
-        const stepTime = 20;   
+        const target = +counterElement.dataset.target;
+        const duration = 4500;
+        const stepTime = 20;
         const steps = duration / stepTime;
         const increment = target / steps;
         let current = 0;
@@ -161,10 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (current >= target) {
                 clearInterval(timer);
-                if (target % 1 !== 0) { 
-                    counterElement.innerText = target.toFixed(1); 
+                if (target % 1 !== 0) {
+                    counterElement.innerText = target.toFixed(1);
                 } else {
-                    counterElement.innerText = target; 
+                    counterElement.innerText = target;
                 }
             } else {
                 if (target % 1 !== 0) {
